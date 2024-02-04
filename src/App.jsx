@@ -1,6 +1,6 @@
 import Navbar from "./components/Navbar.component";
 import { Route, Routes, useLocation } from "react-router-dom";
-import UserAuthForm from "./pages/userAuthForm.page";
+import UserAuthForm from "./pages/UserAuthForm.page";
 import EditorPage from "./pages/editor.pages";
 import RequireAuth from "./common/RequireAuth";
 import HomePage from "./pages/home.page";
