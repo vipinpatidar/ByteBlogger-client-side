@@ -30,6 +30,7 @@ const UserAuthForm = ({ type }) => {
         storeInSession("user", JSON.stringify(res.data));
         setUserAuth({ isAuthenticated: true, ...res?.data });
         navigate(state?.path || "/", { replace: true });
+        window.location.reload();
       }
     } catch (error) {
       const err = error?.response?.data?.error || "Something went wrong.";
