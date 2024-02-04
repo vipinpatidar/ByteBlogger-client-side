@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:3000/api/";
+const BASE_URL = `${import.meta.env.VITE_HOST_UR}/api/`;
 
 axios.defaults.withCredentials = true;
 
