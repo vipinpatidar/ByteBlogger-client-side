@@ -1,4 +1,4 @@
-import InputBox from "../components/input.component";
+import InputBox from "../components/Input.component";
 import googleIcon from "../imgs/google.png";
 import { Link } from "react-router-dom";
 import AnimationWrapper from "../common/page-animation";
