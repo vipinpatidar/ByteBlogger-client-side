@@ -6,9 +6,6 @@ const TrendingBlogPost = ({ index, blog, author }) => {
   const { title, _id: blogId, publishedAt } = blog;
   const { fullName, username, profile_img } = author;
 
-  const isBackendProfileImg =
-    typeof profile_img === "string" && profile_img.includes("/uploads");
-
   return (
     <Link
       to={`/blogs/${title
@@ -22,11 +19,7 @@ const TrendingBlogPost = ({ index, blog, author }) => {
       <div>
         <div className="flex gap-2 items-center mb-3 ">
           <img
-            src={
-              isBackendProfileImg
-                ? import.meta.env.VITE_HOST_URL + profile_img
-                : profile_img
-            }
+            src={profile_img}
             alt="profile image"
             className="w-[25px] h-[25px] rounded-full border border-grey"
           />

@@ -87,10 +87,6 @@ const CommentCard = ({ commentData, index, leftValue, blogData }) => {
     e.target.removeAttribute("disabled");
   };
 
-  const isBackendProfileImg =
-    typeof commented_by?.personal_info?.profile_img === "string" &&
-    commented_by?.personal_info?.profile_img.includes("/uploads");
-
   // console.log(isRepliesHideByParent, children);
 
   return (
@@ -99,10 +95,7 @@ const CommentCard = ({ commentData, index, leftValue, blogData }) => {
         <div className="flex gap-3 items-center mb-4">
           <img
             src={
-              isBackendProfileImg
-                ? import.meta.env.VITE_HOST_URL +
-                  commented_by?.personal_info?.profile_img
-                : commented_by?.personal_info?.profile_img
+              commented_by?.personal_info?.profile_img
             }
             alt="profile image"
             className="w-6 h-6 rounded-full object-cover border border-grey"

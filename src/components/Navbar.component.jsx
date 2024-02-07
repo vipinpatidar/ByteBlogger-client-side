@@ -33,9 +33,6 @@ const Navbar = () => {
 
   // console.log(userAuth);
 
-  const isBackendProfileImg =
-    typeof profile_img === "string" && profile_img.includes("/uploads");
-
   const handleBlur = () => {
     setTimeout(() => {
       setIsNavVisible(false);
@@ -94,7 +91,7 @@ const Navbar = () => {
         >
           <input
             type="search"
-            placeholder="Search..."
+            placeholder="Search Blogs or User..."
             className="w-full md:w-auto bg-grey p-4 pl-6 pr-[12%] md:pr-6 rounded-full placeholder:text-dark-grey md:pl-12"
             onKeyDown={searchQueryHandler}
           />
@@ -157,11 +154,7 @@ const Navbar = () => {
               >
                 <div className="w-12 h-12  border border-grey rounded-full overflow-hidden cursor-pointer">
                   <img
-                    src={
-                      isBackendProfileImg
-                        ? import.meta.env.VITE_HOST_URL + profile_img
-                        : userAuth?.profile_img
-                    }
+                    src={userAuth?.profile_img}
                     alt="profile image"
                     className="w-full h-full object-cover rounded-full"
                   />

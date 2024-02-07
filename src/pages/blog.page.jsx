@@ -7,7 +7,6 @@ import AnimationWrapper from "../common/page-animation";
 import Loader from "../components/loader.component";
 import { getTimeFormate } from "../common/date";
 import BlogInteraction from "../components/blog-interaction.component";
-import NoDataMessage from "../components/nodata.component";
 import BlogPostCard from "../components/blog-post.component";
 import BlogContent from "../components/blog-content.component";
 import CommentsContainer from "../components/comments.component";
@@ -75,9 +74,6 @@ const BlogPage = () => {
     return <Error404 />;
   }
 
-  const isBackendProfileImg =
-    typeof profile_img === "string" && profile_img.includes("/uploads");
-
   /*======================= COMMENT SECTION CODE ======================== */
 
   const showHideCommentContainer = () => {
@@ -101,7 +97,7 @@ const BlogPage = () => {
               showHideCommentContainer={showHideCommentContainer}
             />
             <img
-              src={`${import.meta.env.VITE_HOST_URL}${banner}`}
+              src={`${banner}`}
               alt="blog banner image"
               className="aspect-video"
             />
@@ -116,11 +112,7 @@ const BlogPage = () => {
                   className="flex gap-4 items-start mb-2"
                 >
                   <img
-                    src={
-                      isBackendProfileImg
-                        ? import.meta.env.VITE_HOST_URL + profile_img
-                        : profile_img
-                    }
+                    src={profile_img}
                     alt="profile image"
                     className="w-12 h-12 rounded-full border border-grey"
                   />

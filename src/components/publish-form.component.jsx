@@ -6,6 +6,7 @@ import { makeRequest } from "../utils/axios";
 import Tags from "./tags.component";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import useImageUploader from "../hook/useImageUploader";
 
 const PublishBlogForm = ({ changePageHandler, blogId, linkState }) => {
   // const [character, setCharacter] = useState(0);
@@ -16,6 +17,8 @@ const PublishBlogForm = ({ changePageHandler, blogId, linkState }) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
+  const [isLoading, error, getUploadedImg] = useImageUploader();
+
   // console.log(blogId);
 
   const {
@@ -24,24 +27,32 @@ const PublishBlogForm = ({ changePageHandler, blogId, linkState }) => {
     setBlogInputs,
   } = useContext(EditorContext);
 
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
+
   const isBackendBanner =
     typeof blogInputs.banner === "string" &&
-    blogInputs.banner?.includes("/uploads");
+    blogInputs.banner?.includes("/vipinpatidar5/");
+
+  console.log(isBackendBanner);
 
   /*======================= UPLOAD IMAGE ============================== */
 
   const upload = async (image) => {
     try {
-      const formData = new FormData();
+      const UploadedImg = await getUploadedImg(image);
 
-      formData.append("image", image);
-
-      const res = await makeRequest.post("/upload", formData);
-
-      return res.data;
+      if (UploadedImg) {
+        return UploadedImg;
+      } else {
+        return;
+      }
     } catch (error) {
       console.log(error);
-      const err = error.response.data.error || "Image upload failed.";
+      const err = error?.response?.data?.error || "Image upload failed.";
       toast.error(err);
     }
   };
@@ -103,9 +114,7 @@ const PublishBlogForm = ({ changePageHandler, blogId, linkState }) => {
     bannerUrl = isBackendBanner ? "" : await upload(banner);
     // bannerUrl = "";
 
-    let imageUrl = isBackendBanner
-      ? blogInputs.banner
-      : `/uploads/${bannerUrl}`;
+    let imageUrl = isBackendBanner ? blogInputs.banner : bannerUrl;
 
     mutate({
       title,
@@ -189,7 +198,7 @@ const PublishBlogForm = ({ changePageHandler, blogId, linkState }) => {
             <img
               src={
                 isBackendBanner
-                  ? import.meta.env.VITE_HOST_URL + blogInputs.banner
+                  ? blogInputs.banner
                   : banner && URL.createObjectURL(banner)
               }
               alt="banner"
@@ -273,7 +282,7 @@ const PublishBlogForm = ({ changePageHandler, blogId, linkState }) => {
             disabled={isPending ? true : false}
             onClick={publishBlogSubmitHandler}
           >
-            {isPending ? "Publishing..." : "Publish"}
+            {isPending || isLoading ? "Publishing..." : "Publish"}
           </button>
         </form>
       </section>

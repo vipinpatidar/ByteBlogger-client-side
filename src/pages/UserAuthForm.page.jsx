@@ -137,16 +137,31 @@ const UserAuthForm = ({ type }) => {
             {type === "signup" ? "Sign Up" : "Login"}
           </button>
           {type === "login" && (
-            <div
-              className="text-center mt-8 text-blue-500 text-xl underline cursor-pointer"
-              onClick={() =>
-                setGuestValue({
-                  email: "guest@gmail.com",
-                  password: "Guest123",
-                })
-              }
-            >
-              Login As Guest Editor
+            <div className="flex items-center justify-center gap-3 mt-8 ">
+              <span>Login As</span>
+              <div
+                className="text-center  text-blue-500 text-[15px]  underline cursor-pointer"
+                onClick={() =>
+                  setGuestValue({
+                    email: "guestEditor@gmail.com",
+                    password: "Guest123",
+                  })
+                }
+              >
+                Guest Editor
+              </div>
+              <span>Or</span>
+              <div
+                className="text-center text-blue-500 text-[15px]  underline cursor-pointer"
+                onClick={() =>
+                  setGuestValue({
+                    email: "guestUser@gmail.com",
+                    password: "Guest123",
+                  })
+                }
+              >
+                Guest User
+              </div>
             </div>
           )}
           <div className="relative w-full flex items-center gap-2 mt-6 mb-4 opacity-10 uppercase text-black font-bold">

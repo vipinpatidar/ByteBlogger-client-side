@@ -15,9 +15,6 @@ const BlogPostCard = ({ blog, author }) => {
 
   const { fullName, profile_img, username, email } = author;
 
-  const isBackendProfileImg =
-    typeof profile_img === "string" && profile_img.includes("/uploads");
-
   //   console.log(fullName, profile_img, username, email);
   // console.log(`${title.split(" ").join("-")}-4v8i0p${blogId}`);
 
@@ -34,11 +31,7 @@ const BlogPostCard = ({ blog, author }) => {
       <div className="w-full  mb-4">
         <div className="flex gap-2 items-center mb-6 ">
           <img
-            src={
-              isBackendProfileImg
-                ? import.meta.env.VITE_HOST_URL + profile_img
-                : profile_img
-            }
+            src={profile_img}
             alt="profile image"
             className="w-[25px] h-[25px] rounded-full border border-grey"
           />
@@ -73,7 +66,7 @@ const BlogPostCard = ({ blog, author }) => {
       {/* image */}
       <div className="h-[6.5rem] md:h-28 aspect-square bg-grey">
         <img
-          src={`${import.meta.env.VITE_HOST_URL}${banner}`}
+          src={`${banner}`}
           alt="blog banner image"
           className="w-full h-full aspect-square object-cover"
         />

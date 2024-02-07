@@ -10,6 +10,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ColorThemeState } from "../context/colorTheme.context";
 import defaultBannerLight from "../imgs/blog banner light.png";
 import defaultBannerDark from "../imgs/blog banner dark.png";
+import useImageUploader from "../hook/useImageUploader";
 
 const BlogEditor = ({
   changePageHandler,
@@ -27,6 +28,13 @@ const BlogEditor = ({
 
   const queryClient = useQueryClient();
   const { theme } = ColorThemeState();
+  const [isLoading, error, getUploadedImg] = useImageUploader();
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
 
   // console.log(blogInputs);
   const runOnce = useRef(false);
@@ -35,7 +43,7 @@ const BlogEditor = ({
 
   const isBackendBanner =
     typeof blogInputs.banner === "string" &&
-    blogInputs.banner?.includes("/uploads");
+    blogInputs.banner?.includes("/vipinpatidar5/");
 
   /*======================= SET EDITOR AND IT DATA ======================== */
 
@@ -140,16 +148,16 @@ const BlogEditor = ({
 
   const upload = async (image) => {
     try {
-      const formData = new FormData();
-
-      formData.append("image", image);
-
-      const res = await makeRequest.post("/upload", formData);
-
-      return res.data;
+      const UploadedImg = await getUploadedImg(image);
+      // console.log(UploadedImg, "image url");
+      if (UploadedImg) {
+        return UploadedImg;
+      } else {
+        return;
+      }
     } catch (error) {
       console.log(error);
-      const err = error.response.data.error || "Image upload failed.";
+      const err = error.response?.data?.error || "Image upload failed.";
       toast.error(err);
     }
   };
@@ -214,9 +222,7 @@ const BlogEditor = ({
       }
     }
 
-    let imageUrl = isBackendBanner
-      ? blogInputs.banner
-      : `/uploads/${bannerUrl}`;
+    let imageUrl = isBackendBanner ? blogInputs.banner : bannerUrl;
 
     mutate({
       title,
@@ -245,7 +251,7 @@ const BlogEditor = ({
                 <img
                   src={
                     isBackendBanner
-                      ? import.meta.env.VITE_HOST_URL + blogInputs.banner
+                      ? blogInputs.banner
                       : blogInputs.banner
                       ? URL.createObjectURL(blogInputs.banner)
                       : theme === "light"
@@ -296,7 +302,7 @@ const BlogEditor = ({
             disabled={isPending ? true : false}
           >
             <i className="fi fi-rr-folder-download"></i>{" "}
-            {isPending ? "Saving Draft..." : "Save Draft"}
+            {isPending || isLoading ? "Saving Draft..." : "Save Draft"}
           </button>
         </div>
       </nav>

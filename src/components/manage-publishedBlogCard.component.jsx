@@ -18,10 +18,6 @@ const ManagePublishedBlogCard = ({ blog, mutate, isAdmin = undefined }) => {
   } = blog;
   const { userAuth } = useContext(UserContext);
 
-  const isBackendProfileImg =
-    typeof profile_img === "string" && profile_img.includes("/uploads");
-  // console.log(author);
-
   const deleteBlogHandler = () => {
     mutate({
       blogId: blogId,
@@ -32,7 +28,7 @@ const ManagePublishedBlogCard = ({ blog, mutate, isAdmin = undefined }) => {
     <div className="border-b mb-6 max-md:px-4 border-grey pb-6">
       <div className="flex gap-10  items-center">
         <img
-          src={import.meta.env.VITE_HOST_URL + banner}
+          src={banner}
           alt="blog image"
           className="w-32 h-32 flex-none bg-grey object-cover hidden md:block"
         />
@@ -51,11 +47,7 @@ const ManagePublishedBlogCard = ({ blog, mutate, isAdmin = undefined }) => {
             {isAdmin === "true" && (
               <div className="font-medium text-xl text-dark-grey mb-2 flex items-center">
                 <img
-                  src={
-                    isBackendProfileImg
-                      ? import.meta.env.VITE_HOST_URL + profile_img
-                      : profile_img
-                  }
+                  src={profile_img}
                   className="w-6 h-6 rounded-full flex-none mr-2"
                   alt="user image"
                 />

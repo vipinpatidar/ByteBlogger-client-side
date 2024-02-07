@@ -9,7 +9,6 @@ import BlogPostCard from "../components/blog-post.component";
 import TrendingBlogPost from "../components/trending-blogs.component";
 import NoDataMessage from "../components/nodata.component";
 import LoadMoreDataBtn from "../components/load-more.component";
-import { useLocation } from "react-router-dom";
 
 const categories = [
   "lifestyle",
@@ -21,7 +20,6 @@ const categories = [
   "review",
   "research",
   "programming",
-  "sex",
 ];
 
 const HomePage = () => {

@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { UserContext } from "../context/user.context";
 import { makeRequest } from "../utils/axios";
@@ -7,6 +7,7 @@ import Loader from "../components/loader.component";
 import { Toaster, toast } from "react-hot-toast";
 import InputBox from "../components/Input.component";
 import { storeInSession } from "../common/session";
+import useImageUploader from "../hook/useImageUploader";
 
 const profileDummyDataStructure = {
   personal_info: {
@@ -36,8 +37,15 @@ const EditProfile = () => {
 
   const [bioArea, setBioArea] = useState("");
   const [updatedProfileImg, setUpdatedProfileImg] = useState(null);
+  const [isLoading, error, getUploadedImg] = useImageUploader();
 
   const formDataRef = useRef();
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
 
   /*====================== INPUTS HANDLERS ======================== */
 
@@ -95,16 +103,16 @@ const EditProfile = () => {
 
   const upload = async (image) => {
     try {
-      const formData = new FormData();
+      const UploadedImg = await getUploadedImg(image);
 
-      formData.append("image", image);
-
-      const res = await makeRequest.post("/upload", formData);
-
-      return res.data;
+      if (UploadedImg) {
+        return UploadedImg;
+      } else {
+        return;
+      }
     } catch (error) {
       console.log(error);
-      const err = error.response.data.error || "Image upload failed.";
+      const err = error?.response?.data?.error || "Image upload failed.";
       toast.error(err);
     }
   };
@@ -120,7 +128,7 @@ const EditProfile = () => {
     if (imageUrl.length) {
       mutate({
         type: "imageUpload",
-        profileImg: `/uploads/${imageUrl}`,
+        profileImg: imageUrl,
       });
     }
   };
@@ -179,7 +187,7 @@ const EditProfile = () => {
   const {
     data: user,
     isPending,
-    error,
+    error: userError,
   } = useQuery({
     queryKey: ["users", username],
     queryFn: async () => {
@@ -199,13 +207,8 @@ const EditProfile = () => {
       profile_img,
       bio,
     },
-    account_info: { total_posts, total_reads },
     social_links,
-    joinedAt,
   } = user || profileDummyDataStructure;
-
-  const isBackendProfileImg =
-    typeof profile_img === "string" && profile_img.includes("/uploads");
 
   /*====================== JSX ======================== */
 
@@ -214,7 +217,7 @@ const EditProfile = () => {
       {isPending ? (
         <Loader />
       ) : (
-        !error &&
+        !userError &&
         user && (
           <form className="py-4 md:mt-0  center" ref={formDataRef}>
             <Toaster />
@@ -229,9 +232,7 @@ const EditProfile = () => {
                   </div>
                   <img
                     src={
-                      isBackendProfileImg
-                        ? import.meta.env.VITE_HOST_URL + profile_img
-                        : updatedProfileImg
+                      updatedProfileImg
                         ? URL.createObjectURL(updatedProfileImg)
                         : profile_img
                     }
@@ -253,7 +254,7 @@ const EditProfile = () => {
                   type="button"
                   disabled={isUploadPending}
                 >
-                  {updatedProfileImg && isUploadPending
+                  {(updatedProfileImg && isUploadPending) || isLoading
                     ? "Uploading..."
                     : "Upload"}
                 </button>

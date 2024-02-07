@@ -8,7 +8,6 @@ import Embed from "@editorjs/embed";
 import Code from "@editorjs/code";
 import Header from "@editorjs/header";
 import InlineCode from "@editorjs/inline-code";
-import { makeRequest } from "../utils/axios";
 
 const uploadImageByURL = (e) => {
   console.log(e);
@@ -31,20 +30,38 @@ const uploadImageByURL = (e) => {
 
 const upload = async (image) => {
   try {
-    const formData = new FormData();
-    formData.append("image", image);
-    const res = await makeRequest.post("/upload", formData);
-    return res.data;
+    if (
+      image.type === "image/jpeg" ||
+      image.type === "image/png" ||
+      image.type === "image/jpg"
+    ) {
+      const formData = new FormData();
+      formData.append("file", image);
+      formData.append("upload_preset", import.meta.env.VITE_UPLOAD_PRESET);
+      formData.append("cloud_name", import.meta.env.VITE_CLOUD_NAME);
+
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/${
+          import.meta.env.VITE_CLOUD_NAME
+        }/upload`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+      const data = await response.json();
+      return data.url.toString();
+    }
   } catch (error) {
     console.log(error);
-    const err = error.response.data.error || "Image upload failed.";
+    const err = error?.response?.data?.error || "Image upload failed.";
   }
 };
 
 const uploadImageByFile = async (e) => {
   return upload(e).then((url) => {
     if (url) {
-      let newUrl = `${import.meta.env.VITE_HOST_URL}/uploads/${url}`;
+      let newUrl = url;
 
       return {
         success: 1,

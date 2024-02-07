@@ -14,8 +14,6 @@ const ManageDraftBlogCard = ({ blog, index, mutate, isAdmin = undefined }) => {
     },
   } = blog;
 
-  const isBackendProfileImg =
-    typeof profile_img === "string" && profile_img.includes("/uploads");
 
   const deleteDraftHandler = () => {
     mutate({
@@ -29,7 +27,7 @@ const ManageDraftBlogCard = ({ blog, index, mutate, isAdmin = undefined }) => {
         {index < 10 ? `0${index}` : index}
       </h1>
       <img
-        src={import.meta.env.VITE_HOST_URL + banner}
+        src={banner}
         alt="blog image"
         className="w-32 h-32 flex-none bg-grey object-cover hidden md:block"
       />
@@ -39,11 +37,7 @@ const ManageDraftBlogCard = ({ blog, index, mutate, isAdmin = undefined }) => {
         {isAdmin === "true" && (
           <div className="font-medium text-xl text-dark-grey mb-3 mt-3 flex items-center">
             <img
-              src={
-                isBackendProfileImg
-                  ? import.meta.env.VITE_HOST_URL + profile_img
-                  : profile_img
-              }
+              src={profile_img}
               className="w-6 h-6 rounded-full flex-none mr-2"
               alt="user image"
             />

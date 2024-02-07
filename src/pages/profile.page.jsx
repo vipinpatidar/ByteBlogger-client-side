@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { makeRequest } from "../utils/axios";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
@@ -36,6 +36,10 @@ const ProfilePage = () => {
   const navigate = useNavigate();
   //   console.log(username);
 
+  useEffect(() => {
+    activeTabRef.current?.click();
+  }, []);
+
   /*======================= FETCH USER DATA ======================== */
 
   const {
@@ -48,10 +52,9 @@ const ProfilePage = () => {
       const res = await makeRequest.get(`/users/get-user/${username}`);
       return res.data;
     },
-    enabled: !!userAuth?.isEditor,
   });
 
-  //   console.log(user);
+  // console.log(user);
 
   /*======================= FETCH USER BLOGS ======================== */
 
@@ -92,7 +95,7 @@ const ProfilePage = () => {
     typeof profile_img === "string" && profile_img.includes("/uploads");
 
   if (isPending) {
-    return <p className="text-center text-xl mt-20">Loading...</p>;
+    return <Loader />;
   }
 
   return !isPending && !user ? (
@@ -143,14 +146,16 @@ const ProfilePage = () => {
               <InPageNavigation
                 routes={[
                   `${
-                    userAuth.isAdmin || userAuth.isEditor
+                    user?.isAdmin || user?.isEditor
+                      ? "Published Blogs"
+                      : userAuth.isAuthenticated === false
                       ? "Published Blogs"
                       : "Become An Editor"
                   }`,
                   "About",
                 ]}
-                defaultHidden={["About"]}
                 activeTabRef={activeTabRef}
+                defaultHidden={["About"]}
               >
                 <>
                   {!isFetching && blogsData?.pages[0]?.blogs?.length === 0 ? (
@@ -161,7 +166,7 @@ const ProfilePage = () => {
                         }
                         error={blogsError}
                       />
-                    ) : (
+                    ) : userAuth?.isAuthenticated ? (
                       <div className="flex flex-col justify-center items-center mt-20 mb-20 gap-3">
                         <h1 className="text-2xl font-medium">
                           Want to write your own blogs or save draft
@@ -175,6 +180,10 @@ const ProfilePage = () => {
                         >
                           Check Here
                         </button>
+                      </div>
+                    ) : (
+                      <div className="flex flex-col justify-center items-center mt-20 mb-20 gap-3">
+                        <h1 className="text-2xl font-medium">Nothing here</h1>
                       </div>
                     )
                   ) : !blogsError && blogsData?.pages[0]?.blogs?.length > 0 ? (

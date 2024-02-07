@@ -37,12 +37,6 @@ const NotificationCard = ({ notification, index }) => {
   // console.log(message);
   // console.log(notification);
 
-  const isBackendProfileImg =
-    typeof profile_img === "string" && profile_img.includes("/uploads");
-
-  const isBackendAuthorImg =
-    typeof author_Img === "string" && author_Img.includes("/uploads");
-
   /*=================== DELETE COMMENT OR REPLY ====================== */
 
   const { mutate } = useMutation({
@@ -114,9 +108,7 @@ const NotificationCard = ({ notification, index }) => {
       <div className="flex gap-5 mb-3">
         <img
           src={
-            isBackendProfileImg
-              ? import.meta.env.VITE_HOST_URL + profile_img
-              : profile_img
+            profile_img
           }
           className="w-14 h-14 rounded-full flex-none"
           alt="user image"
@@ -227,9 +219,7 @@ const NotificationCard = ({ notification, index }) => {
           <div className="flex gap-2 mb-2 items-center">
             <img
               src={
-                isBackendAuthorImg
-                  ? import.meta.env.VITE_HOST_URL + author_Img
-                  : author_Img
+                author_Img
               }
               className="w-8 h-8 rounded-full"
             />

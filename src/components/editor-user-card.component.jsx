@@ -11,9 +11,6 @@ const EditorUserCard = ({ user, mutate }) => {
 
   // console.log(user);
 
-  const isBackendProfileImg =
-    typeof profile_img === "string" && profile_img.includes("/uploads");
-
   /*================ ADD REMOVE EDITOR ================== */
   const addRemoveEditorHandler = () => {
     mutate({
@@ -27,9 +24,7 @@ const EditorUserCard = ({ user, mutate }) => {
       <div className="flex gap-4 items-center flex-col md:flex-row flex-wrap lg:flex-nowrap">
         <img
           src={
-            isBackendProfileImg
-              ? import.meta.env.VITE_HOST_URL + profile_img
-              : profile_img
+            profile_img
           }
           className={`${
             isEditor ? "w-20 h-20" : "w-16 h-16"
