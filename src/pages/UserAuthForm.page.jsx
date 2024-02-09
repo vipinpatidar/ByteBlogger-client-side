@@ -29,8 +29,9 @@ const UserAuthForm = ({ type }) => {
       if (res?.data) {
         storeInSession("user", JSON.stringify(res.data));
         setUserAuth({ isAuthenticated: true, ...res?.data });
-        navigate(state?.path || "/", { replace: true });
-        window.location.reload();
+        // navigate(state?.path || "/", { replace: true });
+        window.location.href = state?.path || "/";
+        window.history.replaceState({}, "", "/");
       }
     } catch (error) {
       const err = error?.response?.data?.error || "Something went wrong.";

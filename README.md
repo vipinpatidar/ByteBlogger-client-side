@@ -2,6 +2,10 @@
 
 Welcome to our Blogging Website powered by Vite and React! This web application allows editors to create, edit, and save drafts of blog posts. Additionally, it features a notification system and a comment section for each blog. Admins have access to a dedicated dashboard for managing and overseeing the blogging activities.
 
+# Live Preview
+
+ByteBlogger: https://byteblogger-vipin.netlify.app
+
 ## Features
 
 - Create and Edit Blogs: Editors can create new blog posts and edit existing ones.
