@@ -43,6 +43,8 @@ const isEditorPage = () => {
     }
   }, [blogData]);
 
+  // console.log(blogInputs);
+
   return (
     // <EditorContextProvider>
     blogId && isPending ? (

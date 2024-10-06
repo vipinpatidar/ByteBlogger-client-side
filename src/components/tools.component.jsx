@@ -5,27 +5,32 @@ import List from "@editorjs/list";
 import Marker from "@editorjs/marker";
 import Quote from "@editorjs/quote";
 import Embed from "@editorjs/embed";
-import Code from "@editorjs/code";
 import Header from "@editorjs/header";
 import InlineCode from "@editorjs/inline-code";
+import { CodeWithLanguageTool } from "./codewithlanguagetool.jsx";
 
-const uploadImageByURL = (e) => {
-  console.log(e);
-  let link = new Promise((resolve, reject) => {
-    try {
-      resolve(e);
-    } catch (error) {
-      reject(error);
+const uploadImageByURL = async (url) => {
+  try {
+    // Verify that the URL is valid and fetch the image
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error("Image URL fetch failed");
     }
-  });
 
-  return link.then((url) => {
-    console.log(url);
+    // If the response is successful, return the URL in the required format
     return {
       success: 1,
-      file: { url },
+      file: {
+        url, // The URL of the image
+      },
     };
-  });
+  } catch (error) {
+    console.log(error);
+    return {
+      success: 0,
+      message: "Failed to upload image from URL.",
+    };
+  }
 };
 
 const upload = async (image) => {
@@ -93,7 +98,7 @@ export const tools = {
     class: Quote,
     inlineToolBar: true,
   },
-  code: Code,
+  code: CodeWithLanguageTool,
   header: {
     class: Header,
     config: {

@@ -27,6 +27,8 @@ const PublishBlogForm = ({ changePageHandler, blogId, linkState }) => {
     setBlogInputs,
   } = useContext(EditorContext);
 
+  // console.log(blogInputs);
+
   useEffect(() => {
     if (error) {
       toast.error(error);
@@ -37,7 +39,7 @@ const PublishBlogForm = ({ changePageHandler, blogId, linkState }) => {
     typeof blogInputs.banner === "string" &&
     blogInputs.banner?.includes("/vipinpatidar5/");
 
-  console.log(isBackendBanner);
+  // console.log(isBackendBanner);
 
   /*======================= UPLOAD IMAGE ============================== */
 
@@ -105,7 +107,9 @@ const PublishBlogForm = ({ changePageHandler, blogId, linkState }) => {
       return toast.error("Please write a title for your blog");
     }
     if (!tags.length) {
-      return toast.error("Please add some tags to rank and search your blog");
+      return toast.error(
+        "Please add some tags to rank and search your blog or you forget to click enter"
+      );
     }
     if (!des.length) {
       return toast.error("Please write a short description for your blog");

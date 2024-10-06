@@ -16,6 +16,10 @@ const SearchPage = () => {
   const activeTabRef = useRef();
   // console.log(query);
 
+  useEffect(() => {
+    activeTabRef.current.click();
+  }, [query]);
+
   /*======================= GET / SET SEARCH QUERY ======================== */
 
   const {

@@ -102,6 +102,12 @@ const EditProfile = () => {
   /*====================== UPLOAD IMAGE FUN ======================== */
 
   const upload = async (image) => {
+    //!temporary code for guest users
+    if (userAuth.fullName.includes("guest")) {
+      toast.error("You are not allow to update profile image");
+      return;
+    }
+
     try {
       const UploadedImg = await getUploadedImg(image);
 
@@ -131,12 +137,24 @@ const EditProfile = () => {
         profileImg: imageUrl,
       });
     }
+    setUpdatedProfileImg(null);
   };
 
   /*====================== UPDATE PROFILE DATA ======================== */
 
   const updateProfileDataHandler = (e) => {
     e.preventDefault();
+
+    //!temporary code for guest users
+    if (userAuth.fullName.includes("guest")) {
+      toast.error("You are not allow to update profile information");
+      return;
+    }
+
+    if (uploadProfileImgHandler !== null) {
+      toast.error("Please upload profile image first");
+      return;
+    }
 
     const form = new FormData(formDataRef.current);
     const formData = {};

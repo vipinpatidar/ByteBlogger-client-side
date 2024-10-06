@@ -15,6 +15,8 @@ const UserAuthForm = ({ type }) => {
   const navigate = useNavigate();
   const { state } = useLocation();
   const { setUserAuth } = useContext(UserContext);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingGoogle, setIsLoadingGoogle] = useState(false);
   const [guestValue, setGuestValue] = useState({
     email: "",
     password: "",
@@ -22,6 +24,7 @@ const UserAuthForm = ({ type }) => {
 
   const userAuthThroughServer = async (serverRoute, formData) => {
     try {
+      setIsLoading(true);
       const res = await makeRequest.post(serverRoute, formData);
 
       // console.log(res?.data);
@@ -29,14 +32,16 @@ const UserAuthForm = ({ type }) => {
       if (res?.data) {
         storeInSession("user", JSON.stringify(res.data));
         setUserAuth({ isAuthenticated: true, ...res?.data });
-        // navigate(state?.path || "/", { replace: true });
-        window.location.href = state?.path || "/";
-        window.history.replaceState({}, "", "/");
+        navigate(state?.path || "/", { replace: true });
+        // window.location.href = state?.path || "/";
+        // window.history.replaceState({}, "", "/");
+        setIsLoading(false);
       }
     } catch (error) {
       const err = error?.response?.data?.error || "Something went wrong.";
       console.log(err);
       toast.error(err);
+      setIsLoading(false);
     }
   };
 
@@ -67,6 +72,7 @@ const UserAuthForm = ({ type }) => {
   const googleAuthHandler = async (e) => {
     e.preventDefault();
     try {
+      setIsLoadingGoogle(true);
       const user = await authWithGoogle();
       // console.log(user);
 
@@ -81,6 +87,8 @@ const UserAuthForm = ({ type }) => {
         error.message ||
           "Google login failed. Try again later or use other method for login."
       );
+    } finally {
+      setIsLoadingGoogle(false);
     }
   };
 
@@ -91,7 +99,7 @@ const UserAuthForm = ({ type }) => {
         <form id="authForm" className="w-[80%] max-w-[400px]">
           <h1
             className={`text-4xl font-gelasio capitalize text-center ${
-              type === "login" ? "mb-20" : "mb-16"
+              type === "login" ? "mb-16" : "mb-16"
             }`}
           >
             {type === "login" ? "Welcome back" : "Join us today"}
@@ -134,36 +142,45 @@ const UserAuthForm = ({ type }) => {
             className="btn-dark center mt-10"
             type="submit"
             onClick={submitHandler}
+            disabled={isLoading}
           >
-            {type === "signup" ? "Sign Up" : "Login"}
+            {isLoading ? "Loading..." : type === "login" ? "Login" : "Signup"}
           </button>
           {type === "login" && (
-            <div className="flex items-center justify-center gap-3 mt-8 ">
-              <span>Login As</span>
-              <div
-                className="text-center  text-blue-500 text-[15px]  underline cursor-pointer"
-                onClick={() =>
-                  setGuestValue({
-                    email: "guestEditor@gmail.com",
-                    password: "Guest123",
-                  })
-                }
-              >
-                Guest Editor
+            <>
+              <div className="flex items-center justify-center gap-3 mt-8 ">
+                <span>Login As</span>
+                <div
+                  className="text-center  text-blue-500 text-[15px]  underline cursor-pointer"
+                  onClick={() =>
+                    setGuestValue({
+                      email: "guestEditor@gmail.com",
+                      password: "Guest123",
+                    })
+                  }
+                >
+                  Guest Editor
+                </div>
+                <span>Or</span>
+                <div
+                  className="text-center text-blue-500 text-[15px]  underline cursor-pointer"
+                  onClick={() =>
+                    setGuestValue({
+                      email: "guestUser@gmail.com",
+                      password: "Guest123",
+                    })
+                  }
+                >
+                  Guest User
+                </div>
               </div>
-              <span>Or</span>
-              <div
-                className="text-center text-blue-500 text-[15px]  underline cursor-pointer"
-                onClick={() =>
-                  setGuestValue({
-                    email: "guestUser@gmail.com",
-                    password: "Guest123",
-                  })
-                }
-              >
-                Guest User
-              </div>
-            </div>
+              <p className="text-sm mt-4">
+                <span className="text-red">*</span>
+                There is an admin account too for controlling (editing,
+                deleting, drafting) all editors blogs and there membership if
+                you are interested feel free to contact me.
+              </p>
+            </>
           )}
           <div className="relative w-full flex items-center gap-2 mt-6 mb-4 opacity-10 uppercase text-black font-bold">
             <hr className="w-1/2 border-black" />
@@ -175,9 +192,10 @@ const UserAuthForm = ({ type }) => {
             type="button"
             className="btn-dark flex items-center justify-center gap-3 center w-[90%]"
             onClick={googleAuthHandler}
+            disabled={isLoadingGoogle}
           >
             <img src={googleIcon} alt="google icon" className="w-6" />
-            Continue with Google
+            {isLoadingGoogle ? "Loading..." : "Continue with Google"}
           </button>
           {type === "login" ? (
             <p className="mt-6 text-dark-grey text-xl text-center">

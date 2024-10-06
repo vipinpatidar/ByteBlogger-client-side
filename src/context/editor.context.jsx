@@ -11,10 +11,6 @@ export const EditorContext = createContext({
     author: "",
   },
   setBlogInputs: () => {},
-  editorState: {
-    isReady: Boolean,
-  },
-  setEditorState: () => {},
 });
 
 const EditorContextProvider = ({ children }) => {

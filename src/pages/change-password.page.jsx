@@ -1,14 +1,24 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import InputBox from "../components/Input.component";
 import AnimationWrapper from "../common/page-animation";
 import { toast, Toaster } from "react-hot-toast";
 import { makeRequest } from "../utils/axios";
+import { UserContext } from "../context/user.context";
 
 const ChangePassword = () => {
   const changePasswordRef = useRef();
 
+  const { userAuth } = useContext(UserContext);
+
   const changePasswordSubmitHandler = async (e) => {
     e.preventDefault();
+
+    //!temporary code for guest users
+    if (userAuth.fullName.includes("guest")) {
+      toast.error("You are not allow to change password");
+      return;
+    }
+
     try {
       let form = new FormData(changePasswordRef.current);
       let formData = {};

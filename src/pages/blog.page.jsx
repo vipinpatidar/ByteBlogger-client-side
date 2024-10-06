@@ -102,9 +102,9 @@ const BlogPage = () => {
               className="aspect-video"
             />
             <div className="mt-12">
-              <h2 className="mb-3">{title}</h2>
+              <h2 className="mb-3 font-gelasio">{title}</h2>
 
-              <p className="text-2xl text-dark-grey">{des}</p>
+              <p className="text-[18px] text-dark-grey">{des}</p>
 
               <div className="flex items-center flex-wrap justify-between my-8">
                 <Link
@@ -136,7 +136,7 @@ const BlogPage = () => {
               showHideCommentContainer={showHideCommentContainer}
             />
             {/* Blog content will come here */}
-            <div className="my-12 font-gelasio blog-page-content">
+            <div className="my-12  blog-page-content">
               {content[0].blocks?.map((block, idx) => {
                 return (
                   <div key={idx} className="my-4 md:my-8">

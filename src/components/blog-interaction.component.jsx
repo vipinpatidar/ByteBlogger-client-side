@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../context/user.context";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { makeRequest } from "../utils/axios";
 import { Toaster, toast } from "react-hot-toast";
 
@@ -12,6 +12,8 @@ const BlogInteraction = ({ blogData, blogId, showHideCommentContainer }) => {
   } = useContext(UserContext);
   const location = useLocation();
   const navigate = useNavigate();
+
+  const queryClient = useQueryClient();
 
   let {
     _id: blogObjId,
@@ -30,23 +32,24 @@ const BlogInteraction = ({ blogData, blogId, showHideCommentContainer }) => {
 
   /*=================== GET USER IF HE LIKED THIS BLOG ====================== */
 
-  const { data: user, isPending } = useQuery({
+  const {
+    data: user,
+    isPending,
+    isError,
+  } = useQuery({
     queryKey: ["users", username],
     queryFn: async () => {
       const res = await makeRequest.get(`/users/get-user/${username}`);
       return res.data;
     },
+    enabled: !!username,
   });
 
   useEffect(() => {
-    if (user && !isPending) {
+    if (user && !isPending && !isError) {
       setIsLikedByUser(user?.likedBlogs?.includes(blogObjId));
     }
-  }, [user, blogObjId, blogId, username]);
-
-  // console.log(isLikedByUser);
-  // console.log(user?.likedBlogs);
-  // console.log(user?.likedBlogs?.includes(blogObjId));
+  }, [user, blogObjId, username, isPending, isError]);
 
   /*======================= LIKE AND DISLIKE ======================== */
 
@@ -56,6 +59,11 @@ const BlogInteraction = ({ blogData, blogId, showHideCommentContainer }) => {
     },
     onError: (error) => {
       toast.error(error.response.data.error || "Opps! Something went wrong.");
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: ["blog"],
+      });
     },
   });
 
@@ -73,7 +81,7 @@ const BlogInteraction = ({ blogData, blogId, showHideCommentContainer }) => {
 
     mutate({
       blogId: blogObjId,
-      isLikedByUser: isLikedByUser,
+      isLikedByUser: isLikedByUser, // Send the new liked state
     });
   };
 

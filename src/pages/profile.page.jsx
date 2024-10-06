@@ -37,8 +37,8 @@ const ProfilePage = () => {
   //   console.log(username);
 
   useEffect(() => {
-    activeTabRef.current?.click();
-  }, []);
+    activeTabRef?.current?.click();
+  }, [username]);
 
   /*======================= FETCH USER DATA ======================== */
 

@@ -1,4 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import {
+  solarizedlight,
+  tomorrow,
+} from "react-syntax-highlighter/dist/esm/styles/prism";
+
+import { ColorThemeState } from "../context/colorTheme.context";
 
 const Image = ({ url, caption }) => {
   return (
@@ -32,7 +39,7 @@ const List = ({ style, items }) => {
       {items.map((item, i) => (
         <li
           key={i}
-          className="my-3"
+          className="my-3 font-inter text-[18px] leading-[1.7] font-normal"
           dangerouslySetInnerHTML={{ __html: item }}
         ></li>
       ))}
@@ -40,11 +47,56 @@ const List = ({ style, items }) => {
   );
 };
 
+const BlogCodeSnippet = ({ codeString, language }) => {
+  const [copySuccess, setCopySuccess] = useState("");
+  const { theme } = ColorThemeState();
+
+  const copyToClipboard = () => {
+    navigator.clipboard
+      .writeText(codeString)
+      .then(() => {
+        setCopySuccess("Copied!");
+        setTimeout(() => setCopySuccess(""), 2000); // Reset message after 2 seconds
+      })
+      .catch((err) => {
+        setCopySuccess("Failed to copy");
+      });
+  };
+
+  return (
+    <div className="relative group">
+      {/* Syntax Highlighter */}
+      <SyntaxHighlighter
+        language={language?.toLowerCase()}
+        style={theme === "dark" ? tomorrow : solarizedlight}
+        showLineNumbers
+        wrapLines
+        wrapLongLines
+      >
+        {codeString}
+      </SyntaxHighlighter>
+
+      {/* Copy Button */}
+      <button
+        onClick={copyToClipboard}
+        className="absolute top-2 hidden right-2 bg-blue-500 text-[#fff] px-3 py-1 text-sm rounded hover:bg-blue-400 group-hover:block"
+      >
+        {copySuccess ? copySuccess : "Copy"}
+      </button>
+    </div>
+  );
+};
+
 const BlogContent = ({ block }) => {
   let { type, data } = block;
 
   if (type === "paragraph") {
-    return <p dangerouslySetInnerHTML={{ __html: data.text }}></p>;
+    return (
+      <p
+        className="font-inter text-[18px] leading-[1.7] font-normal"
+        dangerouslySetInnerHTML={{ __html: data.text }}
+      ></p>
+    );
   }
 
   if (type === "header") {
@@ -78,18 +130,30 @@ const BlogContent = ({ block }) => {
 
   if (type === "code") {
     return (
-      <div className="bg-grey p-5 pl-8 my-4 rounded-sm border-l-4 border-black">
-        <code
-          className="text-black whitespace-pre-wrap"
-          dangerouslySetInnerHTML={{ __html: data.code }}
-        ></code>
-      </div>
+      <BlogCodeSnippet
+        codeString={data.code} // Pass the code content correctly as a prop
+        language={data.language} // Set the language
+      />
     );
   }
+  // if (type === "code") {
+  //   return (
+  //     <div className="bg-grey p-5 pl-8 my-4 rounded-sm border-l-4 border-black">
+  //       <code
+  //         className="text-black whitespace-pre-wrap"
+  //         dangerouslySetInnerHTML={{ __html: data.code }}
+  //       ></code>
+  //     </div>
+  //   );
+  // }
 
   if (type === "link") {
     return (
-      <a href={data.link} target="_blank" className="underline my-4">
+      <a
+        href={data.link}
+        target="_blank"
+        className="underline my-4 font-inter text-[16px] leading-[1.7] font-normal"
+      >
         {data.link}
       </a>
     );

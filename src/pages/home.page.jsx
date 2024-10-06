@@ -10,15 +10,32 @@ import TrendingBlogPost from "../components/trending-blogs.component";
 import NoDataMessage from "../components/nodata.component";
 import LoadMoreDataBtn from "../components/load-more.component";
 
+// const categories = [
+//   "lifestyle",
+//   "finance",
+//   "science",
+//   "food",
+//   "health",
+//   "travel",
+//   "review",
+//   "research",
+//   "programming",
+// ];
 const categories = [
-  "lifestyle",
-  "finance",
-  "science",
-  "food",
-  "health",
-  "travel",
-  "review",
-  "research",
+  "frontend",
+  "html",
+  "css",
+  "javascript",
+  "react",
+  "typescript",
+  "backend",
+  "nodejs",
+  "database",
+  "mongoDB",
+  "SQL",
+  "api",
+  "git",
+  "nextjs",
   "programming",
 ];
 
@@ -92,6 +109,27 @@ const HomePage = () => {
             activeTabRef={activeTabRef}
           >
             <>
+              <div className="md:hidden mb-8">
+                <h1 className="font-medium text-xl mb-8 ">
+                  Articles from all interests
+                </h1>
+
+                <div className="flex gap-3 flex-wrap">
+                  {categories.map((category, idx) => (
+                    <button
+                      onClick={() => getCategoryHandler(category.toLowerCase())}
+                      className={`tag ${
+                        pageState.toLowerCase() === category.toLowerCase()
+                          ? "bg-black text-white"
+                          : ""
+                      }`}
+                      key={idx}
+                    >
+                      {category}
+                    </button>
+                  ))}
+                </div>
+              </div>
               {!isFetching && blogsData?.pages[0]?.blogs?.length === 0 ? (
                 <NoDataMessage
                   message={"No blog found. You can read other good blogs :)"}
@@ -154,7 +192,7 @@ const HomePage = () => {
           <div className="flex flex-col gap-10 ">
             <div>
               <h1 className="font-medium text-xl mb-8 ">
-                Stories from all interests
+                Articles from all interests
               </h1>
 
               <div className="flex gap-3 flex-wrap">
@@ -162,7 +200,9 @@ const HomePage = () => {
                   <button
                     onClick={() => getCategoryHandler(category.toLowerCase())}
                     className={`tag ${
-                      pageState === category ? "bg-black text-white" : ""
+                      pageState.toLowerCase() === category.toLowerCase()
+                        ? "bg-black text-white"
+                        : ""
                     }`}
                     key={idx}
                   >

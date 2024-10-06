@@ -11,6 +11,7 @@ const getToken = () => {
 };
 
 // Create a function to make requests with the Authorization header
+/*
 export const token = () => {
   const token = getToken();
 
@@ -25,18 +26,27 @@ export const token = () => {
 
   return headers;
 };
+*/
 
 export const makeRequest = axios.create({
   baseURL: BASE_URL,
-  headers: token(),
-});
-
-/*
-export const makeUserRequest = axios.create({
-  baseURL: BASE_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
+  // headers: token(),
   withCredentials: true,
 });
-*/
+
+makeRequest.interceptors.request.use(
+  (config) => {
+    const token = getToken();
+    if (token) {
+      config.headers["Authorization"] = `Bearer ${token}`;
+    }
+
+    config.headers["Content-Type"] = "application/json";
+
+    return config;
+  },
+
+  (error) => {
+    return Promise.reject(error);
+  }
+);

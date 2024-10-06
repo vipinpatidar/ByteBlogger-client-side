@@ -51,20 +51,25 @@ const BlogEditor = ({
   const [editorIsReady, setEditorIsReady] = useState(false);
 
   useEffect(() => {
-    if (!runOnce.current) {
-      const newEditorInstance = new EditorJs({
-        holder: "textEditor",
-        data: Array.isArray(content) ? content[0] : content,
-        tools: tools,
-        placeholder: "Let's write an awesome story",
-        onReady: () => {
-          setEditorIsReady(true);
-          console.log("Editor.js is ready to work!");
-        },
-      });
+    try {
+      if (!runOnce.current) {
+        const newEditorInstance = new EditorJs({
+          holder: "textEditor",
+          data: Array.isArray(content) ? content[0] : content,
+          tools: tools,
+          placeholder:
+            "Let's write an awesome article (If you upload image by url then paste copy image not image address)",
+          onReady: () => {
+            setEditorIsReady(true);
+            console.log("Editor.js is ready to work!");
+          },
+        });
 
-      setEditorInstance(newEditorInstance);
-      runOnce.current = true;
+        setEditorInstance(newEditorInstance);
+        runOnce.current = true;
+      }
+    } catch (error) {
+      toast.error(error.message || "Something went wrong");
     }
   }, [content, blogId]);
 
@@ -95,6 +100,12 @@ const BlogEditor = ({
 
   const bannerUploadChangeHandler = (e) => {
     let img = e.target.files[0];
+
+    if (img && img.size > 2 * 1024 * 1024) {
+      toast.error("File size should be less than 2 MB");
+      return;
+    }
+
     if (img) {
       setBlogInputs((prevState) => ({ ...prevState, banner: img }));
       // console.log(img);
