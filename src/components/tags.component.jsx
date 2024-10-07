@@ -33,10 +33,10 @@ const Tags = ({ tag, tagIndex }) => {
       // const isTagExist = tags.includes(tag)
 
       const updatedTags = tags.map((t, i) =>
-        i === tagIndex ? e.target.innerText : t
+        i === tagIndex ? e.target.innerText.toLowerCase() : t
       );
 
-      // console.log(updatedTags);
+      console.log(updatedTags);
 
       setBlogInputs((prevState) => ({ ...prevState, tags: updatedTags }));
       e.target.setAttribute("contentEditable", "false");

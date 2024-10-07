@@ -34,7 +34,7 @@ const SideNavbar = () => {
     <>
       <section className="flex relative gap-10 py-0 m-0 max-md:flex-col">
         <div className="sticky top-[79px] z-30 sideNav">
-          <div className="md:hidden bg-white py-1 border-b border-grey flex flex-nowrap overflow-x-auto ">
+          <div className="md:hidden bg-white py-1 border-b border-gray flex flex-nowrap overflow-x-auto ">
             <button
               className="p-5 capitalize"
               ref={sideBarIconTab}
@@ -55,7 +55,7 @@ const SideNavbar = () => {
             />
           </div>
           <div
-            className={`min-w-[240px] h-[calc(100vh - 80px - 65px)] md:h-cover md:sticky top-24 overflow-y-auto p-6 pr-0 border-grey border-r absolute max-md:top-[64px] bg-white max-md:w-[calc(100% + 80px)] px-16 max-md:-ml-7 duration-500 ${
+            className={`min-w-[240px] h-[calc(100vh - 80px - 65px)] md:h-cover md:sticky top-24 overflow-y-auto p-6 pr-0 border-gray border-r absolute max-md:top-[64px] bg-white max-md:w-[calc(100% + 80px)] px-16 max-md:-ml-7 duration-500 ${
               !showHideSideNav
                 ? "max-md:opacity-0 max-md:pointer-events-none"
                 : "opacity-100 pointer-events-auto"
@@ -64,7 +64,7 @@ const SideNavbar = () => {
             {userAuth?.isAdmin && (
               <div>
                 <h1 className="text-xl text-dark-grey mb-2">Admin Dashboard</h1>
-                <hr className="border-grey -ml-6 mb-3 mr-6" />
+                <hr className="border-gray -ml-6 mb-3 mr-6" />
                 <NavLink
                   to={"/adminDashboard/editors?isAdmin=true"}
                   onClick={(e) => {
@@ -108,7 +108,7 @@ const SideNavbar = () => {
 
             <div>
               <h1 className="text-xl text-dark-grey  mb-2">Notifying</h1>
-              <hr className="border-grey -ml-6 mb-3 mr-6" />
+              <hr className="border-gray -ml-6 mb-3 mr-6" />
               <NavLink
                 to={"/message/notifying"}
                 onClick={(e) => {
@@ -127,7 +127,7 @@ const SideNavbar = () => {
                 {" "}
                 {userAuth.isEditor ? "Blogs Dashboard" : "Notification"}
               </h1>
-              <hr className="border-grey -ml-6 mb-3 mr-6" />
+              <hr className="border-gray -ml-6 mb-3 mr-6" />
               {userAuth?.isEditor && (
                 <>
                   <NavLink
@@ -171,7 +171,7 @@ const SideNavbar = () => {
             </div>
 
             <h1 className="text-xl text-dark-grey mb-2 mt-8">Settings</h1>
-            <hr className="border-grey -ml-6 mb-3 mr-6" />
+            <hr className="border-gray -ml-6 mb-3 mr-6" />
             <NavLink
               to={"/settings/edit-profile"}
               onClick={(e) => {

@@ -90,7 +90,7 @@ const BlogInteraction = ({ blogData, blogId, showHideCommentContainer }) => {
   return (
     <>
       <Toaster />
-      <hr className="border-grey my-2" />
+      <hr className="border-gray my-2" />
 
       <div className="flex gap-6">
         <div className="flex gap-3 items-center">
@@ -141,7 +141,7 @@ const BlogInteraction = ({ blogData, blogId, showHideCommentContainer }) => {
         </div>
       </div>
 
-      <hr className="border-grey my-2" />
+      <hr className="border-gray my-2" />
     </>
   );
 };

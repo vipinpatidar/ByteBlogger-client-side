@@ -123,7 +123,7 @@ const SearchPage = () => {
           </>
         </InPageNavigation>
       </div>
-      <div className="min-w-[40%] lg:min-w-[350px] max-w-min border-l border-grey pl-8 pt-3 max-md:hidden">
+      <div className="min-w-[40%] lg:min-w-[350px] max-w-min border-l border-gray pl-8 pt-3 max-md:hidden">
         <h1 className="font-medium text-xl mb-8">
           User related to search <i className="fi fi-rr-user"></i>
         </h1>

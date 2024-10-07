@@ -20,12 +20,10 @@ const EditorUserCard = ({ user, mutate }) => {
   };
 
   return (
-    <div className="border-b mb-6 border-grey pb-6">
+    <div className="border-b mb-6 border-gray pb-6">
       <div className="flex gap-4 items-center flex-col md:flex-row flex-wrap lg:flex-nowrap">
         <img
-          src={
-            profile_img
-          }
+          src={profile_img}
           className={`${
             isEditor ? "w-20 h-20" : "w-16 h-16"
           } rounded-full flex-none`}

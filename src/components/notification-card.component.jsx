@@ -62,6 +62,8 @@ const NotificationCard = ({ notification, index }) => {
         });
       }
 
+      toast.success("Deleted successfully");
+
       queryClient.invalidateQueries({
         queryKey: ["notifications"],
       });
@@ -100,16 +102,14 @@ const NotificationCard = ({ notification, index }) => {
 
   return (
     <div
-      className={`px-1 py-6 md:p-6 border-b border-grey ${
+      className={`px-1 py-6 md:p-6 border-b border-gray ${
         !seen ? "border-l-black border-l-2" : ""
       } `}
     >
       <Toaster />
       <div className="flex gap-5 mb-3">
         <img
-          src={
-            profile_img
-          }
+          src={profile_img}
           className="w-14 h-14 rounded-full flex-none"
           alt="user image"
         />
@@ -154,19 +154,16 @@ const NotificationCard = ({ notification, index }) => {
               <p>{replied_on_comment?.comment}</p>
             </div>
           ) : (
-            <div className="flex items-center gap-2">
-              {message && blog?.title && (
-                <p className="text-xl hover:no-underline">Check Link :</p>
-              )}
+            <div className="">
               {blog?.title && (
                 <Link
                   to={`/blogs/${blog?.title
                     .replace(/[?/|&]/g, "")
                     .split(" ")
                     .join("-")}-4v8i0p${blog._id}`}
-                  className="font-medium text-dark-grey mt-[2px] hover:underline  line-clamp-1"
+                  className="font-medium text-dark-grey mt-[2px] underline  line-clamp-1"
                 >
-                  {`"${blog?.title}"`}
+                  {`${blog?.title}`}
                 </Link>
               )}
             </div>
@@ -217,12 +214,7 @@ const NotificationCard = ({ notification, index }) => {
       {reply && (
         <div className="ml-20 px-4 py-3 bg-grey mt-4 rounded-md">
           <div className="flex gap-2 mb-2 items-center">
-            <img
-              src={
-                author_Img
-              }
-              className="w-8 h-8 rounded-full"
-            />
+            <img src={author_Img} className="w-8 h-8 rounded-full" />
             <div>
               <div className="font-medium text-xl text-dark-grey">
                 <Link

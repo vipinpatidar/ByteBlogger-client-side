@@ -149,11 +149,13 @@ const TextToAdmin = () => {
         name="message"
         id="message"
         value={message}
+        maxLength={300}
         onChange={(e) => setMessage(e.target.value)}
         placeholder="Leave a message..."
         className="input-box pl-5 placeholder:text-dark-grey resize-none h-[120px] overflow-auto"
       ></textarea>
-      <button className="btn-dark mt-5 px-10 ml-2" onClick={addMessageHandler}>
+      <p className="text-black text-sm text-right">Maximum 300 characters</p>
+      <button className="btn-dark mt-4 px-10 ml-2" onClick={addMessageHandler}>
         Send
       </button>
     </div>

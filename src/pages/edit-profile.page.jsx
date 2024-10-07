@@ -255,7 +255,7 @@ const EditProfile = () => {
                         : profile_img
                     }
                     alt="profile image"
-                    className="w-40 h-40 bg-grey rounded-full border border-grey cursor-pointer"
+                    className="w-40 h-40 bg-grey rounded-full border border-gray cursor-pointer"
                   />
                 </label>
                 <input

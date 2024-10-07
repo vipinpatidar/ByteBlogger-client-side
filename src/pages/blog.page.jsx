@@ -104,7 +104,7 @@ const BlogPage = () => {
             <div className="mt-12">
               <h2 className="mb-3 font-gelasio">{title}</h2>
 
-              <p className="text-[18px] text-dark-grey">{des}</p>
+              <p className="text-[18px] text-black">{des}</p>
 
               <div className="flex items-center flex-wrap justify-between my-8">
                 <Link
@@ -114,7 +114,7 @@ const BlogPage = () => {
                   <img
                     src={profile_img}
                     alt="profile image"
-                    className="w-12 h-12 rounded-full border border-grey"
+                    className="w-12 h-12 rounded-full border border-gray"
                   />
 
                   <div>

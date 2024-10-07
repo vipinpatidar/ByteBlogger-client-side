@@ -257,7 +257,7 @@ const BlogEditor = ({
       <AnimationWrapper>
         <section>
           <div className="mx-auto w-full max-w-[900px]">
-            <div className="relative aspect-video hover:opacity-80 border-4 border-grey">
+            <div className="relative aspect-video hover:opacity-80 border-4 border-gray">
               <label htmlFor="uploadBanner">
                 <img
                   src={

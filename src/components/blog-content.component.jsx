@@ -114,6 +114,13 @@ const BlogContent = ({ block }) => {
           dangerouslySetInnerHTML={{ __html: data.text }}
         ></h2>
       );
+    } else if (data.level === 4) {
+      return (
+        <h4
+          className="text-2xl font-bold"
+          dangerouslySetInnerHTML={{ __html: data.text }}
+        ></h4>
+      );
     }
   }
 
@@ -152,7 +159,7 @@ const BlogContent = ({ block }) => {
       <a
         href={data.link}
         target="_blank"
-        className="underline my-4 font-inter text-[16px] leading-[1.7] font-normal"
+        className="underline my-4 font-inter hover:text-blue-500 text-[16px] leading-[1.7] font-normal"
       >
         {data.link}
       </a>

@@ -91,14 +91,12 @@ const CommentCard = ({ commentData, index, leftValue, blogData }) => {
 
   return (
     <div className={`w-full`} style={{ paddingLeft: `${leftValue * 10}px` }}>
-      <div className="p-4 my-5 pb-3 rounded-md border border-grey">
+      <div className="p-4 my-5 pb-3 rounded-md border border-gray">
         <div className="flex gap-3 items-center mb-4">
           <img
-            src={
-              commented_by?.personal_info?.profile_img
-            }
+            src={commented_by?.personal_info?.profile_img}
             alt="profile image"
-            className="w-6 h-6 rounded-full object-cover border border-grey"
+            className="w-6 h-6 rounded-full object-cover border border-gray"
           />
           <p className="line-clamp-1">
             {commented_by?.personal_info?.fullName.split(" ")[0]} @

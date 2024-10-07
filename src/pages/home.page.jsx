@@ -36,7 +36,8 @@ const categories = [
   "api",
   "git",
   "nextjs",
-  "programming",
+  "fundamentals",
+  "miscellaneous",
 ];
 
 const HomePage = () => {
@@ -188,7 +189,7 @@ const HomePage = () => {
           </InPageNavigation>
         </div>
         {/* ========================= Trending Blogs and filter ======================== */}
-        <div className="min-w-[40%] lg:min-w-[400px] max-w-min border-l border-grey pl-7 pt-3 max-md:hidden sticky top-5">
+        <div className="min-w-[40%] lg:min-w-[400px] max-w-min border-l border-gray pl-7 pt-3 max-md:hidden sticky top-5">
           <div className="flex flex-col gap-10 ">
             <div>
               <h1 className="font-medium text-xl mb-8 ">

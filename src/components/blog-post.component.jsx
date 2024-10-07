@@ -26,14 +26,14 @@ const BlogPostCard = ({ blog, author }) => {
         .replace(/[?/|&]/g, "")
         .split(" ")
         .join("-")}-4v8i0p${blogId}`}
-      className="w-full mb-4 py-4 border-b gap-2 md:gap-6 border-grey flex items-center"
+      className="w-full mb-4 py-4 border-b gap-2 md:gap-6 border-gray flex items-center"
     >
       <div className="w-full  mb-4">
         <div className="flex gap-2 items-center mb-6 ">
           <img
             src={profile_img}
             alt="profile image"
-            className="w-[25px] h-[25px] rounded-full border border-grey"
+            className="w-[25px] h-[25px] rounded-full border border-gray"
           />
           <p className="line-clamp-1 capitalize flex items-center gap-2">
             {fullName.split(" ")[0]}
@@ -48,11 +48,20 @@ const BlogPostCard = ({ blog, author }) => {
           {des}
         </p>
         <div className="flex items-center flex-wrap gap-3 mt-6">
-          {tags.slice(0, 1).map((tag) => (
-            <span className="btn-light py-2" key={tag}>
-              {tag}
-            </span>
-          ))}
+          <div className="xl:hidden">
+            {tags.slice(0, 1).map((tag) => (
+              <span className="btn-light py-2" key={tag}>
+                {tag}
+              </span>
+            ))}
+          </div>
+          <div className="hidden xl:flex gap-2">
+            {tags.slice(0, 2).map((tag) => (
+              <span className="btn-light py-2" key={tag}>
+                {tag}
+              </span>
+            ))}
+          </div>
           <span className="flex items-center gap-2 text-dark-grey ml-3 md:ml-4 text-xl">
             <i className="fi fi-rr-heart h-6 mt-0 text-xl"></i>
             {total_likes}

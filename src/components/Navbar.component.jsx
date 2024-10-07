@@ -8,8 +8,8 @@ import { useQuery } from "@tanstack/react-query";
 import { makeRequest } from "../utils/axios";
 import { ColorThemeState } from "../context/colorTheme.context";
 import { storeInSession } from "../common/session";
-import logoDark from "../imgs/readerLogo.png";
-import logoLight from "../imgs/readerLightLogo.png";
+import logoDark from "../imgs/bytes-black.png";
+import logoLight from "../imgs/bytes-white.png";
 
 const Navbar = () => {
   const [isSearchBoxVisible, setIsSearchBoxVisible] = useState(false);
@@ -77,7 +77,7 @@ const Navbar = () => {
     <>
       <nav className="navbar z-50">
         <Toaster />
-        <Link to={"/"} className="flex-none w-[50px]">
+        <Link to={"/"} className="flex-none w-[62px]">
           <img
             src={theme === "light" ? logoDark : logoLight}
             alt="logo"
@@ -85,7 +85,7 @@ const Navbar = () => {
           />
         </Link>
         <div
-          className={`absolute bg-white w-full left-0 top-full mt-0.5 border-b border-grey py-4 px-[5vw] md:border-0 md:block md:relative md:inset-0 md:p-0 md:w-auto md:show ${
+          className={`absolute bg-white w-full left-0 top-full mt-0.5 border-b border-gray py-4 px-[5vw] md:border-0 md:block md:relative md:inset-0 md:p-0 md:w-auto md:show ${
             isSearchBoxVisible ? "show" : "hide"
           }`}
         >

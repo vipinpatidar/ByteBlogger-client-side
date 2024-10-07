@@ -182,9 +182,9 @@ const UserAuthForm = ({ type }) => {
               </p>
             </>
           )}
-          <div className="relative w-full flex items-center gap-2 mt-6 mb-4 opacity-10 uppercase text-black font-bold">
+          <div className="relative w-full flex items-center gap-2 mt-6 mb-4 opacity-20 uppercase text-black font-bold">
             <hr className="w-1/2 border-black" />
-            <p>Or</p>
+            <p className="text-black">Or</p>
             <hr className="w-1/2 border-black" />
           </div>
 

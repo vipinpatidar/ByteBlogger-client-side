@@ -50,3 +50,35 @@ makeRequest.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+/*
+// new
+[
+  {
+    white: "#101524",
+    black: "#f2ddcc",
+    grey: "#343a4d",
+    gray: "#343a4d",
+    "dark-grey": "#646b88",
+    red: "#FF4E4E",
+    transparent: "transparent",
+    twitter: "#0E71AB",
+    purple: "#582CBE",
+  },
+];
+
+// old
+[
+  {
+    white: "#242424",
+    black: "#F3F3F3",
+    grey: "#2A2A2A",
+    gray: "#2a2a2a",
+    "dark-grey": "#E7E7E7",
+    red: "#FF4E4E",
+    transparent: "transparent",
+    twitter: "#0E71AB",
+    purple: "#582CBE",
+  },
+];
+*/

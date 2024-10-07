@@ -11,7 +11,7 @@ import useImageUploader from "../hook/useImageUploader";
 const PublishBlogForm = ({ changePageHandler, blogId, linkState }) => {
   // const [character, setCharacter] = useState(0);
 
-  const characterLimit = 200;
+  const characterLimit = 300;
   let tagLimit = 10;
 
   const queryClient = useQueryClient();
@@ -78,14 +78,13 @@ const PublishBlogForm = ({ changePageHandler, blogId, linkState }) => {
         queryKey: ["dashboardBlogs"],
       });
 
-      toast.success(
-        isBackendBanner
-          ? "Blog Updated successfully"
-          : "Blog published successfully"
-      );
-
       setTimeout(() => {
         let link = linkState ? linkState : "/dashboard/blogs";
+        toast.success(
+          isBackendBanner
+            ? "Blog Updated successfully"
+            : "Blog published successfully"
+        );
         navigate(link);
       }, 1300);
     },
@@ -218,7 +217,7 @@ const PublishBlogForm = ({ changePageHandler, blogId, linkState }) => {
             {des}
           </p>
         </div>
-        <form className="border-grey lg:border lg:pl-8 p-4">
+        <form className="border-gray lg:border lg:pl-8 p-4">
           <label
             className="text-dark/80 mb-2 mt-8 block tracking-wider uppercase"
             htmlFor="title"
@@ -263,12 +262,19 @@ const PublishBlogForm = ({ changePageHandler, blogId, linkState }) => {
             className="text-dark/80 mb-2 mt-8 block tracking-wider uppercase"
             htmlFor="title"
           >
-            Tags for Search Your Blog ( {`${tagLimit} / ${tags.length}`} )
+            <p>
+              Tags for Search Your Blog ( {`${tagLimit} / ${tags.length}`} )
+            </p>
+            <p className="text-sm capitalize my-2">
+              Topic Required Tags: frontend, html, css, javascript, react,
+              typescript, backend, nodejs, database, mongodb, sql, api, git,
+              nextjs, fundamentals, miscellaneous
+            </p>
           </label>
           <div className="relative input-box pl-1 pt-1 pr-1  pb-3">
             <input
               type="text"
-              placeholder="Tags e.g- CSS, React, Node.js (max: 10)"
+              placeholder="Add Tags e.g- CSS, React, Node.js (max: 10) ( Better to add important tags first )"
               name="title"
               className="input-box block bg-white pl-4 placeholder:text-black/50 focus:bg-white mb-3"
               onKeyDown={tagsKeyDownHandler}

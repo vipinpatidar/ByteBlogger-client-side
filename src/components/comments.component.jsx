@@ -64,9 +64,9 @@ const CommentsContainer = ({
           <i className="fi fi-sr-cross-small text-2xl h-7"></i>
         </button>
       </div>
-      <hr className="border-grey my-8 w-[120%] -ml-4" />
+      <hr className="border-gray my-8 w-[120%] -ml-4" />
       <CommentField action={"Comment"} blogData={blogData} />
-      <hr className="border-grey my-8 w-[120%] -ml-4" />
+      <hr className="border-gray my-8 w-[120%] -ml-4" />
 
       {!isFetching && data?.pages[0]?.comments?.length === 0 ? (
         <NoDataMessage message={"No comment"} error={error} />

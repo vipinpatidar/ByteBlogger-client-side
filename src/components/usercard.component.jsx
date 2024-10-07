@@ -11,7 +11,7 @@ const UserCard = ({ user }) => {
       <img
         src={profile_img}
         alt="profile"
-        className="w-14 h-14 rounded-full border border-grey"
+        className="w-14 h-14 rounded-full border border-gray"
       />
       <div>
         <h1 className="font-medium text-xl line-clamp-2 capitalize">

@@ -108,7 +108,7 @@ const ProfilePage = () => {
         !error &&
         user && (
           <section className="h-cover md:flex flex-row-reverse items-start gap-5 min-[1100px]:gap-12">
-            <div className="flex flex-col items-center gap-5 min-w-[250px] md:w-[40%] md:pl-8 md:border-l border-grey md:sticky md:top-[100px] md:py-10">
+            <div className="flex flex-col items-center gap-5 min-w-[250px] md:w-[40%] md:pl-8 md:border-l border-gray md:sticky md:top-[100px] md:py-10">
               <img
                 src={
                   isBackendProfileImg
@@ -116,7 +116,7 @@ const ProfilePage = () => {
                     : profile_img
                 }
                 alt="profile image"
-                className="w-40 h-40 bg-grey rounded-full md:w-32 md:h-32 border border-grey"
+                className="w-40 h-40 bg-grey rounded-full md:w-32 md:h-32 border border-gray"
               />
               <h1 className="text-2xl font-medium">{profile_username}</h1>
               <p className="text-xl capitalize h-6">{fullName}</p>

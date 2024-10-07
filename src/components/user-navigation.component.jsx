@@ -29,10 +29,10 @@ const UserNavigationPanel = ({ isEditorWithBlogData }) => {
       transition={{ duration: 0.3 }}
       className="absolute right-0 z-50"
     >
-      <div className="bg-white border border-grey w-52 overflow-hidden duration-200 text-center shadow-sm">
+      <div className="bg-white border border-gray w-52 overflow-hidden duration-200 text-center shadow-sm">
         <Link
           to={"/"}
-          className="flex gap-2 justify-center py-3 border-b border-grey link "
+          className="flex gap-2 justify-center py-3 border-b border-gray link "
         >
           <i className="fi fi-rr-house-chimney"></i>
           <p>Home</p>
@@ -40,7 +40,7 @@ const UserNavigationPanel = ({ isEditorWithBlogData }) => {
         {userAuth?.isEditor && !isEditorWithBlogData && (
           <Link
             to={"/editor"}
-            className="flex gap-2 justify-center py-3 border-b border-grey link md:hidden"
+            className="flex gap-2 justify-center py-3 border-b border-gray link md:hidden"
           >
             <i className="fi fi-rr-file-edit"></i>
             <p>Write</p>
@@ -48,7 +48,7 @@ const UserNavigationPanel = ({ isEditorWithBlogData }) => {
         )}
         <Link
           to={`/users/${userAuth?.username}`}
-          className="flex gap-2 justify-center py-3 border-b border-grey link"
+          className="flex gap-2 justify-center py-3 border-b border-gray link"
         >
           <i className="fi fi-rr-user"></i>
           <p>Profile</p>
@@ -56,7 +56,7 @@ const UserNavigationPanel = ({ isEditorWithBlogData }) => {
         {!userAuth?.isEditor && (
           <Link
             to={`/becomeEditor`}
-            className="flex gap-2 justify-center py-3 border-b border-grey link  md:hidden"
+            className="flex gap-2 justify-center py-3 border-b border-gray link  md:hidden"
           >
             <i className="fi fi-rr-text"></i>
             <p>Become Editor</p>
@@ -66,7 +66,7 @@ const UserNavigationPanel = ({ isEditorWithBlogData }) => {
         {userAuth?.isAdmin && (
           <Link
             to={"/adminDashboard/editors?isAdmin=true"}
-            className="flex gap-2 justify-center py-3 border-b border-grey link"
+            className="flex gap-2 justify-center py-3 border-b border-gray link"
           >
             <i className="fi fi-rr-user-gear"></i>
             <p>Admin Dashboard</p>
@@ -78,7 +78,7 @@ const UserNavigationPanel = ({ isEditorWithBlogData }) => {
           to={
             userAuth.isEditor ? `/dashboard/blogs` : `/dashboard/notifications`
           }
-          className="flex gap-2 justify-center py-3 border-b border-grey link"
+          className="flex gap-2 justify-center py-3 border-b border-gray link"
         >
           <i
             className={
@@ -90,25 +90,25 @@ const UserNavigationPanel = ({ isEditorWithBlogData }) => {
         </Link>
         <Link
           to={`/message/notifying`}
-          className="flex gap-2 justify-center py-3 border-b border-grey link"
+          className="flex gap-2 justify-center py-3 border-b border-gray link"
         >
           <i className="fi fi-rr-envelope-dot"></i>
           <p>Notifying</p>
         </Link>
         <Link
           to={`/settings/edit-profile`}
-          className="flex gap-2 justify-center border-b border-grey py-3 link"
+          className="flex gap-2 justify-center border-b border-gray py-3 link"
         >
           <i className="fi fi-rr-settings"></i>
           <p>Setting</p>
         </Link>
-        {/* <span className="absolute border-t border-grey w-[100%]"></span> */}
+        {/* <span className="absolute border-t border-gray w-[100%]"></span> */}
         <div
           className="hover:bg-grey w-full flex gap-2 justify-center items-center py-3 text-center"
           onClick={logoutHandler}
         >
-          <i className="fi fi-bs-exit text-black/70"></i>
-          <h1 className=" text-black/80 font-medium mb-1">Logout</h1>
+          <i className="fi fi-bs-exit text-black/60"></i>
+          <h1 className=" text-black/60 font-medium mb-1">Logout</h1>
         </div>
       </div>
     </AnimationWrapper>

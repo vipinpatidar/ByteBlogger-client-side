@@ -21,7 +21,7 @@ const TrendingBlogPost = ({ index, blog, author }) => {
           <img
             src={profile_img}
             alt="profile image"
-            className="w-[25px] h-[25px] rounded-full border border-grey"
+            className="w-[25px] h-[25px] rounded-full border border-gray"
           />
           <p className="line-clamp-1 capitalize flex items-center gap-2">
             {fullName.split(" ")[0]}

@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ColorThemeState } from "../context/colorTheme.context";
-import fullLogoLight from "../imgs/readerLightLogo.png";
-import fullLogoDark from "../imgs/readerLogo.png";
+import fullLogoLight from "../imgs/bytes-white.png";
+import fullLogoDark from "../imgs/bytes-black.png";
 import errorImgLight from "../imgs/404-light.png";
 import errorImgDark from "../imgs/404-dark.png";
 
@@ -27,9 +27,9 @@ const Error404 = () => {
           <img
             src={theme === "light" ? fullLogoDark : fullLogoLight}
             alt="full logo image"
-            className="h-12 w-12 object-contain block select-none"
+            className="h-16 w-16 object-contain block select-none"
           />
-          <h1 className="text-2xl font-medium">ByteBlogger</h1>
+          <h1 className="text-2xl font-medium">ByteBlog</h1>
         </div>
         <p className="mt-4 text-dark-grey">
           Read millions of stories around the world.
