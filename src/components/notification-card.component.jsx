@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { getFullDayFormate } from "../common/date";
+import { getFullDayWithTimeFormate } from "../common/date";
 import CommentField from "./comment-field.component";
 import { UserContext } from "../context/user.context";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -177,7 +177,7 @@ const NotificationCard = ({ notification, index }) => {
         </p>
       )}
       <div className="ml-14 pl-5 mt-1 text-dark-grey flex gap-8">
-        <p>{getFullDayFormate(createdAt)}</p>
+        <p>{getFullDayWithTimeFormate(createdAt)}</p>
 
         {type !== "like" && type !== "editor" && type !== "admin" && (
           <>

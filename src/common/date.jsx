@@ -36,3 +36,18 @@ export const getFullDayFormate = (date) => {
   }, ${formateDate.getFullYear()}
   `;
 };
+
+export const getFullDayWithTimeFormate = (date) => {
+  let formatDate = new Date(date);
+
+  const hours = formatDate.getHours();
+  const minutes = formatDate.getMinutes();
+
+  const formattedTime = `${hours % 12 || 12}:${
+    minutes < 10 ? "0" : ""
+  }${minutes} ${hours >= 12 ? "PM" : "AM"}`;
+
+  return `${formatDate.getDate()} ${
+    months[formatDate.getMonth()]
+  }, ${formatDate.getFullYear()} at ${formattedTime}`;
+};
