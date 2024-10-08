@@ -21,6 +21,8 @@ import BecomeEditor from "./components/become-editor.component";
 import BlogEditors from "./pages/blog-editors.page";
 import TextToAdmin from "./pages/text-to-admin.page";
 import ScrollToTop from "./common/scrollToTop";
+import ReadLaterBlogs from "./pages/read-later-blogs";
+import LikedBlogs from "./pages/liked-blogs";
 
 const App = () => {
   const { userAuth } = useContext(UserContext);
@@ -93,6 +95,24 @@ const App = () => {
             }
           >
             <Route path="notifying" element={<TextToAdmin />} />
+          </Route>
+
+          {/* ======= Setting Routes ======== */}
+
+          <Route
+            path="favorites"
+            element={
+              !userAuth?.email ? (
+                <RequireAuth>
+                  <SideNavbar />
+                </RequireAuth>
+              ) : (
+                <SideNavbar />
+              )
+            }
+          >
+            <Route path="read-later" element={<ReadLaterBlogs />} />
+            <Route path="liked-blogs" element={<LikedBlogs />} />
           </Route>
 
           {/* ======= Setting Routes ======== */}

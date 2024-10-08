@@ -55,7 +55,7 @@ const SideNavbar = () => {
             />
           </div>
           <div
-            className={`min-w-[240px] h-[calc(100vh - 80px - 65px)] md:h-cover md:sticky top-24 overflow-y-auto p-6 pr-0 border-gray border-r absolute max-md:top-[64px] bg-white max-md:w-[calc(100% + 80px)] px-16 max-md:-ml-7 duration-500 ${
+            className={`min-w-[240px] h-[calc(600px)] md:h-cover md:sticky top-24 overflow-y-auto scrollbar-none scrollbar-thumb-rounded scrollbar-thumb-gray-400 p-6 pr-0 border-gray border-r absolute max-md:top-[64px] bg-white max-md:w-[calc(100% + 80px)] px-16 max-md:-ml-7 duration-500 ${
               !showHideSideNav
                 ? "max-md:opacity-0 max-md:pointer-events-none"
                 : "opacity-100 pointer-events-auto"
@@ -170,7 +170,41 @@ const SideNavbar = () => {
               </NavLink>
             </div>
 
-            <h1 className="text-xl text-dark-grey mb-2 mt-8">Settings</h1>
+            {/* Favorites */}
+
+            <div>
+              <h1 className="text-xl text-dark-grey mt-6"> Favorites</h1>
+              <hr className="border-gray -ml-6 mb-3 mr-6" />
+              {userAuth?.email && (
+                <>
+                  <NavLink
+                    to={"/favorites/liked-blogs"}
+                    onClick={(e) => {
+                      setPageState(e.target.innerText);
+                      setShowHideSideNav(false);
+                    }}
+                    className="sidebar-link"
+                  >
+                    <i className="fi fi-rs-heart"></i>
+                    Liked Blogs
+                  </NavLink>
+
+                  <NavLink
+                    to={"/favorites/read-later"}
+                    onClick={(e) => {
+                      setPageState(e.target.innerText);
+                      setShowHideSideNav(false);
+                    }}
+                    className="sidebar-link"
+                  >
+                    <i className="fi fi-rr-bookmark"></i>
+                    Saved Blogs
+                  </NavLink>
+                </>
+              )}
+            </div>
+
+            <h1 className="text-xl text-dark-grey mb-2 mt-6">Settings</h1>
             <hr className="border-gray -ml-6 mb-3 mr-6" />
             <NavLink
               to={"/settings/edit-profile"}

@@ -4,6 +4,7 @@ import { UserContext } from "../context/user.context";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { makeRequest } from "../utils/axios";
 import { Toaster, toast } from "react-hot-toast";
+import ReadLaterBtn from "./readLaterBtn";
 
 const BlogInteraction = ({ blogData, blogId, showHideCommentContainer }) => {
   const {
@@ -44,6 +45,8 @@ const BlogInteraction = ({ blogData, blogId, showHideCommentContainer }) => {
     },
     enabled: !!username,
   });
+
+  // console.log(user);
 
   useEffect(() => {
     if (user && !isPending && !isError) {
@@ -117,6 +120,16 @@ const BlogInteraction = ({ blogData, blogId, showHideCommentContainer }) => {
             <i className="fi fi-rr-comment-dots h-5"></i>
           </button>
           <p className="text-xl text-dark-grey">{total_comments}</p>
+        </div>
+
+        <div className="flex gap-3 items-center">
+          <ReadLaterBtn
+            blogId={blogObjId}
+            user={user}
+            username={username}
+            isPending={isPending}
+            isError={isError}
+          />
         </div>
 
         <div className="flex gap-6 items-center ml-auto">

@@ -47,5 +47,6 @@ export default {
         purple: "#582CBE",
       },
     }),
+    require("tailwind-scrollbar"),
   ],
 };
