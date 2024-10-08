@@ -3,6 +3,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import {
   solarizedlight,
   tomorrow,
+  nightOwl,
 } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 import { ColorThemeState } from "../context/colorTheme.context";
@@ -39,7 +40,7 @@ const List = ({ style, items }) => {
       {items.map((item, i) => (
         <li
           key={i}
-          className="my-3 font-inter text-[18px] leading-[1.7] font-normal"
+          className="my-3 font-inter text-[16px] md:text-[18px] leading-[1.7] font-normal"
           dangerouslySetInnerHTML={{ __html: item }}
         ></li>
       ))}
@@ -71,7 +72,6 @@ const BlogCodeSnippet = ({ codeString, language }) => {
         style={theme === "dark" ? tomorrow : solarizedlight}
         showLineNumbers
         wrapLines
-        wrapLongLines
       >
         {codeString}
       </SyntaxHighlighter>
@@ -93,7 +93,7 @@ const BlogContent = ({ block }) => {
   if (type === "paragraph") {
     return (
       <p
-        className="font-inter text-[18px] leading-[1.7] font-normal"
+        className="font-inter text-[16px] md:text-[18px] leading-[1.7] font-normal"
         dangerouslySetInnerHTML={{ __html: data.text }}
       ></p>
     );
