@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { makeRequest } from "../utils/axios";
+import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const ReadLaterBtn = ({ blogId, user, username, isPending, isError }) => {
   const [isReadLaterByUser, setIsReadLaterByUser] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const queryClient = useQueryClient();
 

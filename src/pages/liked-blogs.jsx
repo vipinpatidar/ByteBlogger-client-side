@@ -1,11 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
-import {
-  useInfiniteQuery,
-  useMutation,
-  useQueryClient,
-} from "@tanstack/react-query";
+import React, { useState } from "react";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { makeRequest } from "../utils/axios";
-import { Toaster, toast } from "react-hot-toast";
+
 import NoDataMessage from "../components/nodata.component";
 import AnimationWrapper from "../common/page-animation";
 import Loader from "../components/loader.component";
@@ -15,8 +11,6 @@ import BlogPostCard from "../components/blog-post.component";
 
 const LikedBlogs = () => {
   const [query, setQuery] = useState("");
-
-  const queryClient = useQueryClient();
 
   /*================== FETCH LOGGED USER BLOGS ===================== */
   const {
@@ -42,7 +36,6 @@ const LikedBlogs = () => {
 
   return (
     <div className=" mx-auto pb-12">
-      <Toaster />
       <h1 className="text-2xl my-4">Your Saved Blogs</h1>
       <div className="relative max-md:mt-5 md:mt-8 mb-10">
         <input
