@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import AnimationWrapper from "../common/page-animation";
 import toast, { Toaster } from "react-hot-toast";
 import { EditorContext } from "../context/editor.context";
@@ -10,6 +10,7 @@ import useImageUploader from "../hook/useImageUploader";
 
 const PublishBlogForm = ({ changePageHandler, blogId, linkState }) => {
   // const [character, setCharacter] = useState(0);
+  const tagInputRef = useRef(null);
 
   const characterLimit = 300;
   let tagLimit = 10;
@@ -86,7 +87,7 @@ const PublishBlogForm = ({ changePageHandler, blogId, linkState }) => {
             : "Blog published successfully"
         );
         navigate(link);
-      }, 1300);
+      }, 300);
     },
     onSettled: () => {},
   });
@@ -112,6 +113,12 @@ const PublishBlogForm = ({ changePageHandler, blogId, linkState }) => {
     }
     if (!des.length) {
       return toast.error("Please write a short description for your blog");
+    }
+
+    if (tagInputRef.current.value !== "") {
+      return toast.error(
+        "You have value in tags input, if you want to add that tag please click enter or clear input."
+      );
     }
 
     bannerUrl = isBackendBanner ? "" : await upload(banner);
@@ -278,6 +285,7 @@ const PublishBlogForm = ({ changePageHandler, blogId, linkState }) => {
               name="title"
               className="input-box block bg-white pl-4 placeholder:text-black/50 focus:bg-white mb-3"
               onKeyDown={tagsKeyDownHandler}
+              ref={tagInputRef}
             />
             <div className="flex flex-wrap gap-3">
               {tags.length > 0 &&
