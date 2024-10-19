@@ -122,7 +122,7 @@ const BlogCodeSnippet = ({ codeString, language }) => {
 
 const BlogContent = ({ block }) => {
   let { type, data } = block;
-  console.log(type, data);
+  // console.log(type, data);
 
   if (type === "paragraph") {
     return (
