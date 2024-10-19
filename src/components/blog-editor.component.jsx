@@ -76,6 +76,32 @@ const BlogEditor = ({
   useEffect(() => {
     const updateEditorContent = () => {
       if (!isBlogPending && !blogError && blogData && editorIsReady) {
+        if (editorInstance.isReady) {
+          editorInstance.clear(); // Clear the editor content
+
+          // Only render content if it's different from the current content
+          if (content?.[0]?.blocks) {
+            // console.log(content[0]);
+            editorInstance.render(content[0]); // Render the new content directly
+          }
+        }
+      }
+    };
+
+    updateEditorContent();
+  }, [
+    blogData,
+    content,
+    editorInstance,
+    isBlogPending,
+    blogError,
+    editorIsReady,
+  ]);
+
+  /*
+  useEffect(() => {
+    const updateEditorContent = () => {
+      if (!isBlogPending && !blogError && blogData && editorIsReady) {
         // Use editorInstance instead of newEditorInstance
         if (editorInstance.isReady) {
           editorInstance.save().then((data) => {
@@ -95,7 +121,7 @@ const BlogEditor = ({
     blogError,
     editorIsReady,
   ]);
-
+*/
   /*====================== SET BANNER IMAGE HANDLER ======================== */
 
   const bannerUploadChangeHandler = (e) => {

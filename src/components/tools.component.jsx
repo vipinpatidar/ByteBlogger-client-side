@@ -1,13 +1,13 @@
 // import tools for editor js functionality
 import Image from "@editorjs/image";
 import Link from "@editorjs/link";
-import List from "@editorjs/list";
 import Marker from "@editorjs/marker";
 import Quote from "@editorjs/quote";
 import Embed from "@editorjs/embed";
 import Header from "@editorjs/header";
 import InlineCode from "@editorjs/inline-code";
 import { CodeWithLanguageTool } from "./codewithlanguagetool.jsx";
+import NestedList from "@editorjs/nested-list";
 
 const uploadImageByURL = async (url) => {
   try {
@@ -90,7 +90,7 @@ export const tools = {
     },
   },
   list: {
-    class: List,
+    class: NestedList,
     inlineToolBar: true,
   },
   marker: Marker,

@@ -33,6 +33,39 @@ const Quote = ({ quote, caption }) => {
 };
 
 const List = ({ style, items }) => {
+  // Recursive function to render each item with its possible sub-items
+  const renderListItems = (items) => {
+    // console.log(items);
+    return items.map((item, i) => (
+      <li
+        key={i}
+        className="my-3 font-inter text-[18px] leading-[1.7] font-normal"
+      >
+        {item?.content ? item?.content : item}
+        {item?.items && item?.items?.length > 0 && (
+          <ol
+            className={`pl-5 ${
+              style === "ordered" ? "list-decimal" : "list-disc"
+            }`}
+          >
+            {renderListItems(item?.items)}
+          </ol>
+        )}
+      </li>
+    ));
+  };
+
+  return (
+    <ol
+      className={`pl-5 ${style === "ordered" ? "list-decimal" : "list-disc"}`}
+    >
+      {renderListItems(items)}
+    </ol>
+  );
+};
+
+/*
+const List = ({ style, items }) => {
   return (
     <ol
       className={`pl-5 ${style === "ordered" ? "list-decimal" : "list-disc"}`}
@@ -47,7 +80,7 @@ const List = ({ style, items }) => {
     </ol>
   );
 };
-
+*/
 const BlogCodeSnippet = ({ codeString, language }) => {
   const [copySuccess, setCopySuccess] = useState("");
   const { theme } = ColorThemeState();
@@ -89,12 +122,22 @@ const BlogCodeSnippet = ({ codeString, language }) => {
 
 const BlogContent = ({ block }) => {
   let { type, data } = block;
+  console.log(type, data);
 
   if (type === "paragraph") {
     return (
       <p
         className="font-inter text-[16px] md:text-[18px] leading-[1.7] font-normal"
         dangerouslySetInnerHTML={{ __html: data.text }}
+      ></p>
+    );
+  }
+
+  if (type === "pasteCopyText") {
+    return (
+      <p
+        className="font-inter text-[16px] md:text-[18px] leading-[1.7] font-normal whitespace-pre-wrap"
+        dangerouslySetInnerHTML={{ __html: data.copiedText }}
       ></p>
     );
   }
