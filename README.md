@@ -158,6 +158,22 @@ Go to backend github repo and download or clone it. Use it's Dockerfile and dock
 3.  Install dependencies:
     npm install
 
+4.  Add the .env file in the project root.
+
+5.  Update the .env variable:
+
+- VITE_HOST_URL=http://localhost:3000
+- VITE_STRIPE_KEY=your stripe public key
+- VITE_CLOUD_NAME=your cloudinary cloud name
+- VITE_UPLOAD_PRESET=your cloudinary upload preset
+- VITE_FIREBASE_API_KEY=your firebase API key
+- VITE_MESSAGING_SENDER_ID=your firebase messaging sender id
+- VITE_FIREBASE_APP_ID=your firebase app id
+
+## Usage
+
+Start the development server:npm run dev
+
 ## Connecting to Backend
 
 <div>
@@ -165,14 +181,4 @@ Go to backend github repo and download or clone it. Use it's Dockerfile and dock
 for connection to backend you can add my ByteBlogger-server code and clone it. for more information read server Readme.md file
 </a>
 </div>
-
-Locate the .env file in the project root.
-
-Update the .env variable:
-
-- VITE_HOST_URL=backend port url
-- VITE_STRIPE_KEY=stripe secret key
-
-## Usage
-
-Start the development server:npm run dev
+<br />
