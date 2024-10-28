@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+  # define the frontend service
+  # we can use any name for the service. A standard naming convention is to use "web" for the frontend
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VITE_HOST_URL: ${VITE_HOST_URL}
+        VITE_STRIPE_KEY: ${VITE_STRIPE_KEY}
+        VITE_CLOUD_NAME: ${VITE_CLOUD_NAME}
+        VITE_UPLOAD_PRESET: ${VITE_UPLOAD_PRESET}
+        VITE_FIREBASE_API_KEY: ${VITE_FIREBASE_API_KEY}
+        VITE_MESSAGING_SENDER_ID: ${VITE_MESSAGING_SENDER_ID}
+        VITE_FIREBASE_APP_ID: ${VITE_FIREBASE_APP_ID}
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_HOST_URL=${VITE_HOST_URL}
+      - VITE_STRIPE_KEY=${VITE_STRIPE_KEY}
+      - VITE_CLOUD_NAME=${VITE_CLOUD_NAME}
+      - VITE_UPLOAD_PRESET=${VITE_UPLOAD_PRESET}
+      - VITE_FIREBASE_API_KEY=${VITE_FIREBASE_API_KEY}
+      - VITE_MESSAGING_SENDER_ID=${VITE_MESSAGING_SENDER_ID}
+      - VITE_FIREBASE_APP_ID=${VITE_FIREBASE_APP_ID}
+    volumes:
+      - .:/app
+      - /app/node_modules

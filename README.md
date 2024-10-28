@@ -24,14 +24,134 @@ Before you begin, ensure you have the following installed:
 
 ## Installation
 
-1. Clone the repository:
-   git clone https://github.com/your-username/blog-website.git
+### Using Docker
 
-2. Navigate to the project directory:
-   cd blog-website
+#### add a .env file in frontend directory with environment variables like
 
-3. Install dependencies:
-   npm install
+         #VITE_HOST_URL=http://localhost:3000
+         #VITE_STRIPE_KEY=your stripe public key
+         #VITE_CLOUD_NAME=your cloudinary cloud name
+         #VITE_UPLOAD_PRESET=your cloudinary upload preset
+         #VITE_FIREBASE_API_KEY=your firebase API key
+         #VITE_MESSAGING_SENDER_ID=your firebase messaging sender id
+         #VITE_FIREBASE_APP_ID=your firebase app id
+
+<details>
+<summary><code>Dockerfile</code></summary>
+
+```Dockerfile
+
+# Use the official Node.js 20-alpine as a base image
+ARG NODE_VERSION=20.11.0
+FROM node:${NODE_VERSION}-alpine
+
+# Create app directory
+WORKDIR /app
+
+# Use environment variables at build time for Vite
+ARG VITE_HOST_URL
+ARG VITE_STRIPE_KEY
+ARG VITE_CLOUD_NAME
+ARG VITE_UPLOAD_PRESET
+ARG VITE_FIREBASE_API_KEY
+ARG VITE_MESSAGING_SENDER_ID
+ARG VITE_FIREBASE_APP_ID
+
+# Make the environment variables available during build time
+ENV VITE_HOST_URL=${VITE_HOST_URL}
+ENV VITE_STRIPE_KEY=${VITE_STRIPE_KEY}
+ENV VITE_CLOUD_NAME=${VITE_CLOUD_NAME}
+ENV VITE_UPLOAD_PRESET=${VITE_UPLOAD_PRESET}
+ENV VITE_FIREBASE_API_KEY=${VITE_FIREBASE_API_KEY}
+ENV VITE_MESSAGING_SENDER_ID=${VITE_MESSAGING_SENDER_ID}
+ENV VITE_FIREBASE_APP_ID=${VITE_FIREBASE_APP_ID}
+
+# Copy package.json and package-lock.json to take advantage of caching
+COPY package*.json ./
+
+# Install dependencies using build-time environment variables
+RUN npm install
+
+# Copy the rest of the application code
+COPY . .
+
+# Build the Vite app for production
+RUN npm run build
+
+# Expose the port that Vite will use
+EXPOSE 5173
+
+# Start the Vite development server
+CMD ["npm", "run", "dev"]
+
+```
+
+</details>
+
+<details>
+<summary><code>docker-compose.yaml</code></summary>
+
+```dockerfile
+# specify the version of docker-compose
+version: "3.8"
+services:
+ # define the frontend service
+  # we can use any name for the service. A standard naming convention is to use "web" for the frontend
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VITE_HOST_URL: ${VITE_HOST_URL}
+        VITE_STRIPE_KEY: ${VITE_STRIPE_KEY}
+        VITE_CLOUD_NAME: ${VITE_CLOUD_NAME}
+        VITE_UPLOAD_PRESET: ${VITE_UPLOAD_PRESET}
+        VITE_FIREBASE_API_KEY: ${VITE_FIREBASE_API_KEY}
+        VITE_MESSAGING_SENDER_ID: ${VITE_MESSAGING_SENDER_ID}
+        VITE_FIREBASE_APP_ID: ${VITE_FIREBASE_APP_ID}
+    # specify the ports to expose for the web service
+    # the first number is the port on the host machine
+    # the second number is the port inside the container
+    ports:
+      - "5173:5173"
+    # specify the environment variables for the web service
+    environment:
+      - VITE_HOST_URL=${VITE_HOST_URL}
+      - VITE_STRIPE_KEY=${VITE_STRIPE_KEY}
+      - VITE_CLOUD_NAME=${VITE_CLOUD_NAME}
+      - VITE_UPLOAD_PRESET=${VITE_UPLOAD_PRESET}
+      - VITE_FIREBASE_API_KEY=${VITE_FIREBASE_API_KEY}
+      - VITE_MESSAGING_SENDER_ID=${VITE_MESSAGING_SENDER_ID}
+      - VITE_FIREBASE_APP_ID=${VITE_FIREBASE_APP_ID}
+    # define the volumes to be used by the services
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+```
+
+</details>
+
+#### Creating Images from .yaml file
+
+docker-compose build
+
+### Adding frontend image to backend compose file
+
+<div align="center">
+<a href="https://github.com/vipinpatidar/ByteBlogger-server-code">
+<h2>Go to backend github repo and download or clone it. Use its Dockerfile and docker-compose.yaml file by adding created frontend image</h2>
+</a>
+</div>
+
+4.  Clone the repository:
+    git clone https://github.com/your-username/blog-website.git
+
+5.  Navigate to the project directory:
+    cd blog-website
+
+6.  Install dependencies:
+    npm install
 
 ## Connecting to Backend
 
