@@ -172,7 +172,7 @@ Go to backend github repo and download or clone it. Use it's Dockerfile and dock
 
 ## Usage
 
-Start the development server:npm run dev
+Start the development server: npm run dev
 
 ## Connecting to Backend
 
