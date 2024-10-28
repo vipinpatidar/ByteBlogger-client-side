@@ -139,8 +139,8 @@ docker-compose build
 ### Adding frontend image to backend compose file
 
 <div align="center">
-<a href="https://github.com/vipinpatidar/ByteBlogger-server-code">
-<h2>Go to backend github repo and download or clone it. Use its Dockerfile and docker-compose.yaml file by adding created frontend image</h2>
+<a href="https://github.com/vipinpatidar/ByteBlogger-server-code" target="_blank">
+Go to backend github repo and download or clone it. Use its Dockerfile and docker-compose.yaml file by adding created frontend image
 </a>
 </div>
 
