@@ -144,18 +144,27 @@ Go to backend github repo and download or clone it. Use its Dockerfile and docke
 </a>
 </div>
 
-4.  Clone the repository:
+<br />
+<br />
+
+## Using Github clone
+
+1.  Clone the repository:
     git clone https://github.com/your-username/blog-website.git
 
-5.  Navigate to the project directory:
+2.  Navigate to the project directory:
     cd blog-website
 
-6.  Install dependencies:
+3.  Install dependencies:
     npm install
 
 ## Connecting to Backend
 
+<div align="center">
+<a href="https://github.com/vipinpatidar/ByteBlogger-server-code" target="_blank">
 for connection to backend you can add my ByteBlogger-server code and clone it. for more information read server Readme.md file
+</a>
+</div>
 
 Locate the .env file in the project root.
 
