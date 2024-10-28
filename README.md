@@ -28,13 +28,13 @@ Before you begin, ensure you have the following installed:
 
 #### add a .env file in frontend directory with environment variables like
 
-         #VITE_HOST_URL=http://localhost:3000
-         #VITE_STRIPE_KEY=your stripe public key
-         #VITE_CLOUD_NAME=your cloudinary cloud name
-         #VITE_UPLOAD_PRESET=your cloudinary upload preset
-         #VITE_FIREBASE_API_KEY=your firebase API key
-         #VITE_MESSAGING_SENDER_ID=your firebase messaging sender id
-         #VITE_FIREBASE_APP_ID=your firebase app id
+      #VITE_HOST_URL=http://localhost:3000
+      #VITE_STRIPE_KEY=your stripe public key
+      #VITE_CLOUD_NAME=your cloudinary cloud name
+      #VITE_UPLOAD_PRESET=your cloudinary upload preset
+      #VITE_FIREBASE_API_KEY=your firebase API key
+      #VITE_MESSAGING_SENDER_ID=your firebase messaging sender id
+      #VITE_FIREBASE_APP_ID=your firebase app id
 
 <details>
 <summary><code>Dockerfile</code></summary>
@@ -140,13 +140,12 @@ docker-compose build
 
 <div align="center">
 <a href="https://github.com/vipinpatidar/ByteBlogger-server-code" target="_blank">
-Go to backend github repo and download or clone it. Use its Dockerfile and docker-compose.yaml file by adding created frontend image
+Go to backend github repo and download or clone it. Use it's Dockerfile and docker-compose.yaml file by adding created frontend image
 </a>
 </div>
 
 <br />
 <br />
-
 ## Using Github clone
 
 1.  Clone the repository:
@@ -160,7 +159,7 @@ Go to backend github repo and download or clone it. Use its Dockerfile and docke
 
 ## Connecting to Backend
 
-<div align="center">
+<div>
 <a href="https://github.com/vipinpatidar/ByteBlogger-server-code" target="_blank">
 for connection to backend you can add my ByteBlogger-server code and clone it. for more information read server Readme.md file
 </a>
